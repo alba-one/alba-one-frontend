@@ -1,0 +1,105 @@
+@import './_colors';
+@import './_mediaQueries';
+
+$bold: 700;
+$regular: 400;
+
+@mixin h1 {
+  font-size: 28px;
+  font-weight: $bold;
+
+  @media #{$Mobile} {
+    font-size: 20px;
+  }
+}
+
+@mixin h2 {
+  font-size: 24px;
+  font-weight: $bold;
+
+  @media #{$Mobile} {
+    font-size: 18px;
+  }
+}
+
+@mixin h3 {
+  font-size: 20px;
+  font-weight: $bold;
+
+  @media #{$Mobile} {
+    font-size: 16px;
+  }
+}
+
+@mixin h4 {
+  font-size: 16px;
+  font-weight: $bold;
+
+  @media #{$Mobile} {
+    font-size: 14px;
+  }
+}
+
+@mixin body1 {
+  font-size: 18px;
+  font-weight: $regular;
+
+  @media #{$Mobile} {
+    font-size: 16px;
+  }
+}
+
+@mixin body2 {
+  font-size: 16px;
+  font-weight: $regular;
+
+  @media #{$Mobile} {
+    font-size: 14px;
+  }
+}
+
+@mixin body3 {
+  font-size: 14px;
+  font-weight: $regular;
+
+  @media #{$Mobile} {
+    font-size: 12px;
+  }
+}
+
+@mixin textStyle($size: base, $color: $black) {
+  @if $size == h1 {
+    @include h1;
+    color: $color;
+  }
+
+  @if $size == h2 {
+    @include h2;
+    color: $color;
+  }
+
+  @if $size == h3 {
+    @include h3;
+    color: $color;
+  }
+
+  @if $size == h4 {
+    @include h4;
+    color: $color;
+  }
+
+  @if $size == body1 {
+    @include body1;
+    color: $color;
+  }
+
+  @if $size == body2 {
+    @include body2;
+    color: $color;
+  }
+
+  @if $size == body3 {
+    @include body3;
+    color: $color;
+  }
+}

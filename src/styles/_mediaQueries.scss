@@ -1,0 +1,6 @@
+$breakPoint_L: 1200;
+$breakPoint_M: 768;
+
+$Tablet: 'screen and (max-width : #{$breakPoint_L - 1}px)';
+$Mobile: 'screen and (max-width : #{$breakPoint_M - 1}px)';
+$greaterThanMobile: 'screen and (min-width : #{$breakPoint_M}px)';
