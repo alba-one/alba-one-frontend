@@ -1,7 +1,7 @@
 import ApplyInfo from './Components/ApplyInfo/ApplyInfo';
 
 import css from './ApplyBox.module.scss';
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 
 const ApplyBox = () => {
   let total = 30;

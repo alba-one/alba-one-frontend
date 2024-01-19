@@ -1,4 +1,4 @@
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 import css from './ExistingProfile.module.scss';
 import None from './Components/None/None.tsx';
 import ApplyBox from './Components/ApplyBox/ApplyBox.tsx';
