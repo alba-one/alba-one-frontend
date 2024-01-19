@@ -7,8 +7,7 @@ const Logined = () => {
   const isemployee = localStorage.getItem('type') === 'employee';
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('type');
+    localStorage.clear();
     navigate('/');
   };
 

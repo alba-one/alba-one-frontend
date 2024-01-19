@@ -79,6 +79,7 @@ const Signin = () => {
         if (userItem) {
           localStorage.setItem('token', userItem.token);
           localStorage.setItem('type', userItem.user.item.type);
+          localStorage.setItem('userId', userItem.user.item.id);
           setModalInfo(prev => ({
             ...prev,
             desc: '환영합니다!',
