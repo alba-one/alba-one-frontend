@@ -15,6 +15,11 @@
   gap: 28px;
 }
 
+.logoWrap {
+  display: block;
+  object-fit: cover;
+}
+
 .inputBox {
   display: flex;
   flex-direction: column;
@@ -51,6 +56,12 @@
   margin-left: 8px;
   text-decoration: underline;
   cursor: pointer;
+
+  &:visited,
+  &:active,
+  &:link {
+    color: $link;
+  }
 }
 
 .radioBtnWrap {

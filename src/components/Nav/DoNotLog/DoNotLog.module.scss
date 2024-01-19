@@ -1,8 +1,15 @@
 @import '@_styles/typos';
+@import '@_styles/colors';
 
 .cta {
   @include h4;
   background-color: $white;
   border: none;
   cursor: pointer;
+
+  &:visited,
+  &:active,
+  &:link {
+    color: $black;
+  }
 }
