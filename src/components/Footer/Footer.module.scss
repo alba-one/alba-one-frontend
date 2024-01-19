@@ -1,2 +1,36 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
 .footer {
+  //   display: flex;
+  //   align-items: center;
+
+  height: 100px;
+  background-color: $gray_10;
+
+  @include body2;
+  color: $gray_40;
+}
+
+.footerContainer {
+  max-width: 1200px;
+
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  place-items: center;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  margin: 0 auto;
+}
+
+.enquire {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
 }
