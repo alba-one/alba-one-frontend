@@ -22,69 +22,6 @@
   margin-top: 32px;
 }
 
-/* care component css*/
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 16px;
-  background-color: $white;
-  border-radius: 12px;
-}
-
-.cardImageBox {
-  height: 160px;
-  overflow: hidden;
-}
-
-.cardImage {
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.infoBox {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.storeTitle {
-  @include h3;
-}
-
-.descBox {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.desc {
-  @include textStyle('body3', $gray_50);
-}
-
-.payBox {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.pay {
-  @include h2;
-}
-
-.comparePay {
-  @include button1;
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  border-radius: 20px;
-  background-color: $red_10;
-  color: $white;
-}
-/* --- */
-
 .headerBox {
   display: flex;
   justify-content: space-between;

@@ -1,4 +1,4 @@
-import Icon from '../../Icon';
+import Icon from '@_icon/Icon';
 import css from './Logined.module.scss';
 
 const Logined = () => {
