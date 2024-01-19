@@ -1,4 +1,4 @@
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 import css from './MakeProfile.module.scss';
 import Dropdown from '@_icon/Dropdown/Dropdown';
 
