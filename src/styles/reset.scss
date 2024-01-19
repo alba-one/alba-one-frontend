@@ -1,3 +1,5 @@
+@import '@_styles/colors';
+
 html,
 body,
 div,
@@ -130,7 +132,7 @@ a {
 
 a:visited,
 a:link {
-  color: inherit;
+  color: $link;
 }
 
 input:focus {

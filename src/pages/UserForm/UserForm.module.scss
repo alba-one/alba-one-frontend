@@ -1,0 +1,95 @@
+@import '@_styles/typos';
+@import '@_styles/colors';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputTitle {
+  @include body2;
+}
+
+.input {
+  padding: 16px 20px;
+  width: 345px;
+  border: 1px solid $gray_30;
+  border-radius: 6px;
+}
+
+.cta {
+  padding: 14px 0;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background-color: $red_40;
+  color: $white;
+}
+
+.question {
+  @include body2;
+  margin-top: 20px;
+  cursor: default;
+}
+
+.link {
+  margin-left: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.radioBtnWrap {
+  display: flex;
+  gap: 16px;
+}
+
+.radioBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 40px;
+  width: 100%;
+  border: 1px solid $gray_30;
+  border-radius: 30px;
+}
+
+.activeBorder {
+  border: 1px solid $red_40;
+}
+
+.radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $gray_30;
+  border-radius: 100%;
+  background-color: $white;
+}
+
+.active {
+  background-color: $red_40;
+  background-image: url('../../assets/icons/i_checked.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.radioInput {
+  display: none;
+}
