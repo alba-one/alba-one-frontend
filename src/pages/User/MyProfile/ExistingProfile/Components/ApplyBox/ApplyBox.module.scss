@@ -1,0 +1,68 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.applyBox {
+  > :last-child {
+    border-radius: 0px 0px 12px 12px;
+  }
+}
+
+.titleColumnBox {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 2fr;
+
+  width: 100%;
+  height: 56px;
+
+  //   text-align: center;
+  line-height: 56px;
+
+  @include body1;
+  background-color: $red_10;
+  border: 1px solid $gray_20;
+  border-radius: 12px 12px 0px 0px;
+}
+
+.titleColumn {
+  padding: 0px 20px;
+}
+
+.applyInfo {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 2fr;
+
+  width: 100%;
+  height: 56px;
+
+  //   text-align: center;
+  line-height: 56px;
+
+  @include body2;
+  border: 1px solid $gray_20;
+  border-top: none;
+}
+
+.pagination {
+  grid-column: 1/5;
+  display: flex;
+  justify-content: center;
+
+  margin-top: 14px;
+}
+
+.pageNum {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+
+  @include body3;
+}
+
+.selected {
+  background-color: $red_30;
+  color: $white;
+}

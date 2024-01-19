@@ -1,0 +1,33 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.none {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+
+  padding: 60px 24px;
+  border-radius: 12px;
+  border: 1px solid $gray_20;
+}
+
+.comment {
+  width: 100%;
+  margin-bottom: 24px;
+
+  text-align: center;
+}
+
+.showListBtn {
+  width: 30%;
+  height: 50px;
+
+  border: none;
+  border-radius: 6px;
+  background-color: $red_40;
+  color: $white;
+  @include h4;
+
+  cursor: pointer;
+}
