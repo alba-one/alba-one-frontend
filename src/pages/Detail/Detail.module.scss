@@ -1,2 +1,34 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
 .container {
+  background-color: $gray_5;
+}
+
+.topOfDetail {
+  display: flex;
+  align-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  height: 736px;
+  margin: 0 auto;
+  padding: 60px 0px 60px 0px;
+}
+
+.title {
+  width: 100%;
+}
+
+.category {
+  @include h4;
+  color: $red_40;
+
+  margin-bottom: 8px;
+}
+
+.storeName {
+  @include h1;
+  color: $black;
+}
+
+.storeDescription {
 }
