@@ -5,6 +5,9 @@ import notiActive from '@_assets/icons/i_noti_active.svg';
 import mail from '@_assets/icons/i_mail.svg';
 import facebook from '@_assets/icons/i_facebook.svg';
 import instagram from '@_assets/icons/i_instagram.svg';
+import clock from '@_assets/icons/i_clock.svg';
+import location from '@_assets/icons/i_location.svg';
+import arrowUp from '@_assets/icons/i_arrow_up.svg';
 
 interface Props {
   title: string;
@@ -22,6 +25,9 @@ const iconList: IconList = {
   mail,
   facebook,
   instagram,
+  clock,
+  location,
+  arrowUp,
 };
 
 const Icon = ({ title }: Props) => {
