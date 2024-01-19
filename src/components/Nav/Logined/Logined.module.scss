@@ -1,0 +1,8 @@
+@import '@_styles/typos';
+
+.cta {
+  @include h4;
+  background-color: $white;
+  border: none;
+  cursor: pointer;
+}
