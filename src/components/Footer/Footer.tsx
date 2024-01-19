@@ -1,4 +1,4 @@
-import Icon from '../Icon';
+import Icon from '@_icon/Icon';
 import css from './Footer.module.scss';
 
 const Footer = () => {
