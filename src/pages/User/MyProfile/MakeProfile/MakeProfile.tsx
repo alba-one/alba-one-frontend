@@ -1,6 +1,6 @@
 import Icon from '@_components/Icon';
 import css from './MakeProfile.module.scss';
-import Dropdown from '@_icon/Dropdown/Dropdown';
+import Dropdown from '@_components/Dropdown/Dropdown';
 
 const MakeProfile = () => {
   return (
