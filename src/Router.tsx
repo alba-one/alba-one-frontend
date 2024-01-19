@@ -2,8 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import List from './pages/List';
 import Detail from './pages/Detail';
-import Signin from './pages/Signin';
-import Signup from './pages/Signup';
+import UserForm from './pages/UserForm';
 import User from './pages/User';
 import Footer from './components/Footer';
 
@@ -14,8 +13,8 @@ const Router = () => {
       <Routes>
         <Route index element={<List />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<UserForm />} />
+        <Route path="/signup" element={<UserForm />} />
         <Route path="/user" element={<User />} />
       </Routes>
       <Footer />

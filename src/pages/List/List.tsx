@@ -1,4 +1,4 @@
-import Card from '@_icon/Card';
+import Card from '../../components/Card';
 import css from './List.module.scss';
 
 const List = () => {
