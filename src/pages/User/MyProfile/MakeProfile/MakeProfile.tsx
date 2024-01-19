@@ -1,5 +1,6 @@
 import Icon from '@_icon/Icon';
 import css from './MakeProfile.module.scss';
+import Dropdown from '@_icon/Dropdown/Dropdown';
 
 const MakeProfile = () => {
   return (
@@ -25,7 +26,7 @@ const MakeProfile = () => {
         <div className={css.userLocation}>
           <div className={css.subTitle}>선호 지역*</div>
           <div className={css.selectBox}>
-            <span>선택해주세요</span> <span>▼</span>
+            <Dropdown />
           </div>
         </div>
 
