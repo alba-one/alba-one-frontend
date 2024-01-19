@@ -67,6 +67,11 @@ $regular: 400;
   }
 }
 
+@mixin button1 {
+  font-size: 14px;
+  font-weight: $bold;
+}
+
 @mixin textStyle($size: base, $color: $black) {
   @if $size == h1 {
     @include h1;
@@ -100,6 +105,11 @@ $regular: 400;
 
   @if $size == body3 {
     @include body3;
+    color: $color;
+  }
+
+  @if $size == button1 {
+    @include button1;
     color: $color;
   }
 }
