@@ -1,4 +1,4 @@
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 import { ShopType } from 'src/types/cardType';
 
 import css from './Card.module.scss';

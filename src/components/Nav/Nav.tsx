@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 import DoNotLog from './DoNotLog';
 import Logined from './Logined';
 import css from './Nav.module.scss';

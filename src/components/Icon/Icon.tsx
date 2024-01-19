@@ -13,6 +13,8 @@ import dropdown from '@_assets/icons/i_dropdown.svg';
 import phone from '@_assets/icons/i_phone.svg';
 import chevronLeft from '@_assets/icons/i_chevron_left.svg';
 import chevronRight from '@_assets/icons/i_chevron_right.svg';
+import caution from '@_assets/icons/i_caution.svg';
+import select from '@_assets/icons/i_select.svg';
 
 interface Props {
   title: string;
@@ -39,6 +41,8 @@ const iconList: IconList = {
   phone,
   chevronLeft,
   chevronRight,
+  caution,
+  select,
 };
 
 const Icon = ({ title, handleIcon }: Props) => {
