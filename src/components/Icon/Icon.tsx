@@ -11,6 +11,7 @@ import arrowUp from '@_assets/icons/i_arrow_up.svg';
 
 interface Props {
   title: string;
+  handleIcon?: () => void;
 }
 
 interface IconList {
@@ -30,8 +31,8 @@ const iconList: IconList = {
   arrowUp,
 };
 
-const Icon = ({ title }: Props) => {
-  return <img src={iconList[title]} alt={title} />;
+const Icon = ({ title, handleIcon }: Props) => {
+  return <img src={iconList[title]} alt={title} onClick={handleIcon} />;
 };
 
 export default Icon;

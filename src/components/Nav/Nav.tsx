@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Icon from '@_icon/Icon';
 import DoNotLog from './DoNotLog';
 import Logined from './Logined';
@@ -13,7 +13,9 @@ const Nav = () => {
 
   return (
     <nav className={css.nav}>
-      <Icon title="logo" />
+      <Link to="/">
+        <Icon title="logo" />
+      </Link>
       <div className={css.searchBox}>
         <Icon title="search" />
         <input
