@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 import css from './Logined.module.scss';
 
 const Logined = () => {

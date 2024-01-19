@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import Icon from '@_icon/Icon';
+import Icon from '@_components/Icon';
 import css from './Footer.module.scss';
 
 const Footer = () => {

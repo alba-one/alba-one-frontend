@@ -12,7 +12,7 @@
 .inputForm {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
 }
 
 .logoWrap {
@@ -44,6 +44,14 @@
   border-radius: 6px;
   background-color: $red_40;
   color: $white;
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+
+.disable {
+  background-color: $red_10;
+  cursor: default;
+  transition: 0.5s all ease-in-out;
 }
 
 .question {
@@ -53,15 +61,13 @@
 }
 
 .link {
+  @include body2;
   margin-left: 8px;
   text-decoration: underline;
+  color: $link;
+  background-color: white;
+  border: none;
   cursor: pointer;
-
-  &:visited,
-  &:active,
-  &:link {
-    color: $link;
-  }
 }
 
 .radioBtnWrap {
