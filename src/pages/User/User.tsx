@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAxios } from '@_lib/axios';
-import ExistingProfile from './MyProfile/ExistingProfile/ExistingProfile.tsx';
-import MakeProfile from './MyProfile/MakeProfile/MakeProfile.tsx';
+import ExistingProfile from './components/employee/ExistingProfile/ExistingProfile.tsx';
+import MakeProfile from './components/employee/MakeProfile/MakeProfile.tsx';
 import RegistUser from './MyProfile/RegistUser';
 
 import css from './User.module.scss';
@@ -40,11 +40,13 @@ const User = () => {
 
   return (
     <section className={css.container}>
-      {!userInfo.name && (
+      {userInfo && userInfo.name ? (
+        <ExistingProfile />
+      ) : isOpenMakeProfile ? (
+        <MakeProfile setIsOpenMakeProfile={setIsOpenMakeProfile} />
+      ) : (
         <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
       )}
-      {isOpenMakeProfile && <MakeProfile />}
-      {userInfo.name && <ExistingProfile />}
     </section>
   );
 };

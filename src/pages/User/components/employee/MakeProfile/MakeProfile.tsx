@@ -1,12 +1,20 @@
 import Icon from '@_components/Icon';
-import css from './MakeProfile.module.scss';
 import Dropdown from '@_components/Dropdown/Dropdown';
 
-const MakeProfile = () => {
+import css from './MakeProfile.module.scss';
+
+interface Props {
+  setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MakeProfile = ({ setIsOpenMakeProfile }: Props) => {
   return (
     <section className={css.makeProfile}>
       <div className={css.title}>
-        내 프로필 <Icon title="close" />
+        내 프로필
+        <div onClick={() => setIsOpenMakeProfile(prev => !prev)}>
+          <Icon title="close" />
+        </div>
       </div>
       <div className={css.inputs}>
         <div className={css.userName}>

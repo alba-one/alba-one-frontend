@@ -1,7 +1,11 @@
+import LargeCard from '../../components/LargeCard/LargeCard';
+import EmployerDetailBox from './Components/EmployerDetailBox/EmployerDetailBox.tsx';
+import EmployeeDetailBox from './Components/EmployeeDetailBox/EmployeeDetailBox.tsx';
+
 import css from './Detail.module.scss';
-import Card from './Components/Card/Card.tsx';
 
 const Detail = () => {
+  const isEmployee = false;
   return (
     <section className={css.container}>
       <div className={css.topOfDetail}>
@@ -9,7 +13,7 @@ const Detail = () => {
           <div className={css.category}>카페</div>
           <div className={css.storeName}>지연이 카페</div>
         </div>
-        <Card />
+        <LargeCard type="employee" />
         <div className={css.storeDescription}>
           <div className={css.descriptionTitle}>공고 설명</div>
           <div className={css.descriptionWords}>
@@ -19,10 +23,7 @@ const Detail = () => {
         </div>
       </div>
 
-      <div className={css.showRecent}>
-        <div className={css.recentTitle}>최근에 본 공고</div>
-        <div className={css.recentGrid}></div>
-      </div>
+      {isEmployee ? <EmployeeDetailBox /> : <EmployerDetailBox />}
     </section>
   );
 };

@@ -15,6 +15,7 @@ import chevronLeft from '@_assets/icons/i_chevron_left.svg';
 import chevronRight from '@_assets/icons/i_chevron_right.svg';
 import caution from '@_assets/icons/i_caution.svg';
 import select from '@_assets/icons/i_select.svg';
+import camera from '@_assets/icons/i_camera.svg';
 
 interface Props {
   title: string;
@@ -43,6 +44,7 @@ const iconList: IconList = {
   chevronRight,
   caution,
   select,
+  camera,
 };
 
 const Icon = ({ title, handleIcon }: Props) => {

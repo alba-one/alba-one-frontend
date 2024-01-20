@@ -1,0 +1,142 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.storeCard {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 24px;
+  width: 100%;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 356px;
+
+  border: 1px solid $gray_10;
+  border-radius: 12px;
+
+  line-height: 1.5;
+
+  @include body2;
+}
+
+.redCard {
+  background-color: $red_10;
+}
+
+.storeImg {
+  width: 86%;
+
+  background: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=4032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+    no-repeat;
+  background-size: cover;
+
+  border-radius: 12px;
+}
+
+.storeInfo {
+  width: 38%;
+  height: 100%;
+  margin-left: 28px;
+  padding-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.innerTitle {
+  @include h4;
+  color: $red_40;
+}
+
+.mainText {
+  display: flex;
+  align-items: center;
+  @include h1;
+}
+
+.percentBadge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 162px;
+  padding: 12px;
+  margin-left: 10px;
+
+  background-color: $red_30;
+  border-radius: 20px;
+
+  @include body3;
+  color: $white;
+}
+
+.when {
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+
+  @include body2;
+  color: $gray_50;
+}
+
+.timeTable {
+  margin-left: 8px;
+}
+
+.location {
+  margin-left: 8px;
+}
+
+.where {
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+
+  @include body2;
+  color: $gray_50;
+}
+
+.greeting {
+  height: 80px;
+}
+
+.applyBtn {
+  height: 50px;
+  border-radius: 6px;
+  border: none;
+
+  background-color: $red_40;
+  @include h4;
+  color: $white;
+}
+
+.storeBtnBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.editBtn {
+  width: 48%;
+  height: 50px;
+
+  border-radius: 6px;
+  border: 1px solid $red_40;
+
+  background-color: $white;
+  @include h4;
+  color: $red_40;
+}
+
+.registerBtn {
+  width: 48%;
+  height: 50px;
+  border-radius: 6px;
+  border: none;
+
+  background-color: $red_40;
+  @include h4;
+  color: $white;
+}
