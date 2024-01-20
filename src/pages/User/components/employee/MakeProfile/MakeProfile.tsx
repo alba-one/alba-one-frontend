@@ -11,7 +11,7 @@ const MakeProfile = ({ setIsOpenMakeProfile }: Props) => {
   return (
     <section className={css.makeProfile}>
       <div className={css.title}>
-        내 프로필{' '}
+        내 프로필
         <div onClick={() => setIsOpenMakeProfile(prev => !prev)}>
           <Icon title="close" />
         </div>

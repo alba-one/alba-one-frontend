@@ -1,21 +1,23 @@
 import Icon from '@_components/Icon';
 import css from './LargeCard.module.scss';
 
-interface LargeCardProps {
-  type: string;
+interface Props {
+  type: 'employee' | 'employer';
 }
 
-const largeCard = ({ type }: LargeCardProps) => {
+const LaregeCard = ({ type }: Props) => {
   return (
-    <div className={`${css.storeCard} ${type === 'store' ? css.redCard : ''}`}>
+    <div
+      className={`${css.storeCard} ${type === 'employer' ? css.redCard : ''}`}
+    >
       <div className={css.storeImg} />
       <div className={css.storeInfo}>
         <div className={css.innerTitle}>
-          {type === 'store' ? '식당' : '시급'}
+          {type === 'employer' ? '식당' : '시급'}
         </div>
         <div className={css.mainText}>
-          {type === 'store' ? '도토리식당' : '15,000원'}
-          {type === 'store' ? (
+          {type === 'employer' ? '도토리식당' : '15,000원'}
+          {type === 'employer' ? (
             ''
           ) : (
             <div className={css.percentBadge}>
@@ -25,7 +27,7 @@ const largeCard = ({ type }: LargeCardProps) => {
           )}
         </div>
 
-        {type === 'store' ? (
+        {type === 'employer' ? (
           ''
         ) : (
           <div className={css.when}>
@@ -42,7 +44,7 @@ const largeCard = ({ type }: LargeCardProps) => {
           편안한 분위기의 동네 카페 ! 동네 단골 손님들 위주의 카페라 많이 바쁘지
           않고 편안하게 일할 수 있습니다😊
         </div>
-        {type === 'store' ? (
+        {type === 'employer' ? (
           <div className={css.storeBtnBox}>
             <button className={css.editBtn}>편집하기</button>
             <button className={css.registerBtn}>공고 등록하기</button>
@@ -55,4 +57,4 @@ const largeCard = ({ type }: LargeCardProps) => {
   );
 };
 
-export default largeCard;
+export default LaregeCard;

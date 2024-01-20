@@ -1,0 +1,24 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.announced {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  @include h1;
+
+  margin-bottom: 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-rows: 5fr 5fr;
+
+  grid-gap: 14px;
+
+  width: 100%;
+  height: 800px;
+}

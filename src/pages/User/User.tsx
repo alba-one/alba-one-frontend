@@ -4,9 +4,6 @@ import ExistingProfile from './components/employee/ExistingProfile/ExistingProfi
 import MakeProfile from './components/employee/MakeProfile/MakeProfile.tsx';
 import RegistUser from './MyProfile/RegistUser';
 
-import ExistingStore from './components/employer/ExistingStore/ExistingStore.tsx';
-import MakeStore from './components/employer/MakeStore/MakeStore.tsx';
-
 import css from './User.module.scss';
 
 interface UserInfo {
@@ -43,15 +40,13 @@ const User = () => {
 
   return (
     <section className={css.container}>
-      {userInfo.name ? (
+      {userInfo && userInfo.name ? (
         <ExistingProfile />
       ) : isOpenMakeProfile ? (
-        <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
-      ) : (
         <MakeProfile setIsOpenMakeProfile={setIsOpenMakeProfile} />
+      ) : (
+        <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
       )}
-      <ExistingStore />
-      {/* <MakeStore /> */}
     </section>
   );
 };

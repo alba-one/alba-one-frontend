@@ -1,0 +1,26 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.showRecent {
+  padding: 60px 0px 60px 0px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recentTitle {
+  @include h1;
+
+  margin-bottom: 32px;
+}
+
+.recentGrid {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-rows: 5fr 5fr;
+
+  grid-gap: 14px;
+
+  width: 100%;
+  height: 800px;
+}
