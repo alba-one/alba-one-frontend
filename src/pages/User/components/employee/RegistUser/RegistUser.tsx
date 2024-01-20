@@ -5,7 +5,7 @@ interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const None = ({ setIsOpenMakeProfile }: Props) => {
+const RegistUser = ({ setIsOpenMakeProfile }: Props) => {
   const { isEmployee } = useGetUserType();
 
   return (
@@ -28,4 +28,4 @@ const None = ({ setIsOpenMakeProfile }: Props) => {
   );
 };
 
-export default None;
+export default RegistUser;
