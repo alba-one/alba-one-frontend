@@ -43,13 +43,15 @@ const User = () => {
 
   return (
     <section className={css.container}>
-      {!userInfo.name && (
+      {userInfo.name ? (
+        <ExistingProfile />
+      ) : isOpenMakeProfile ? (
         <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
+      ) : (
+        <MakeProfile setIsOpenMakeProfile={setIsOpenMakeProfile} />
       )}
-      {isOpenMakeProfile && <MakeProfile />}
-      {userInfo.name && <ExistingProfile />}
       <ExistingStore />
-      <MakeStore />
+      {/* <MakeStore /> */}
     </section>
   );
 };
