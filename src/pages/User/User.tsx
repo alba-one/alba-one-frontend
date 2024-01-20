@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getAxios } from '@_lib/axios';
-import ExistingProfile from './MyProfile/ExistingProfile/ExistingProfile.tsx';
-import MakeProfile from './MyProfile/MakeProfile/MakeProfile.tsx';
+import ExistingProfile from './components/employee/ExistingProfile/ExistingProfile.tsx';
+import MakeProfile from './components/employee/MakeProfile/MakeProfile.tsx';
 import RegistUser from './MyProfile/RegistUser';
+
+import ExistingStore from './components/employer/ExistingStore/ExistingStore.tsx';
+import MakeStore from './components/employer/MakeStore/MakeStore.tsx';
 
 import css from './User.module.scss';
 
@@ -45,6 +48,8 @@ const User = () => {
       )}
       {isOpenMakeProfile && <MakeProfile />}
       {userInfo.name && <ExistingProfile />}
+      <ExistingStore />
+      <MakeStore />
     </section>
   );
 };
