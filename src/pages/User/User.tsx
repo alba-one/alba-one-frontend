@@ -41,8 +41,8 @@ const User = () => {
 
   return (
     <section className={css.container}>
-      {userInfo && haveProfile ? (
-        <ExistingProfile />
+      {userInfo && userInfo.name ? (
+        <ExistingProfile userInfo={userInfo} />
       ) : isOpenMakeProfile ? (
         <MakeProfile
           setIsOpenMakeProfile={setIsOpenMakeProfile}
