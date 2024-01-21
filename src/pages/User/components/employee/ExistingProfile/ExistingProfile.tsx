@@ -12,11 +12,22 @@ interface Props {
     phone?: string;
     address?: string;
     bio?: string;
+    shop?: ShopType[];
   };
 }
 
+interface ShopType {
+  id: string;
+  name: string;
+  category: string;
+  address1: string;
+  address2: string;
+  description: string;
+  imageUrl: string;
+  originalHourlyPay: number;
+}
+
 const ExistingProfile = ({ userInfo }: Props) => {
-  const isApply = false;
   let phoneNum = '';
 
   const makePhoneNumForm = () => {
@@ -25,11 +36,12 @@ const ExistingProfile = ({ userInfo }: Props) => {
         3,
         7
       )}-${userInfo.phone.slice(-4)}`;
-      console.log(phoneNum);
     }
   };
 
   makePhoneNumForm();
+
+  console.log(userInfo);
 
   const goToEdit = () => {};
 
@@ -59,7 +71,7 @@ const ExistingProfile = ({ userInfo }: Props) => {
       <div className={css.lowerBox}>
         <div className={css.lowerContainer}>
           <div className={css.lowerTitle}>신청 내역</div>
-          {isApply ? <None /> : <ApplyBox />}
+          {userInfo.shop === null ? <None /> : <ApplyBox />}
         </div>
       </div>
     </section>
