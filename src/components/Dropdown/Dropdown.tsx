@@ -3,10 +3,10 @@ import css from './Dropdown.module.scss';
 
 interface Props {
   type: string;
-
+  selectedValue: string | null;
   setSelectedValue: (value: string | null) => void;
 }
-const Dropdown = ({ type, setSelectedValue }: Props) => {
+const Dropdown = ({ type, selectedValue, setSelectedValue }: Props) => {
   const addressArr = [
     '서울시 종로구',
     '서울시 중구',
@@ -62,7 +62,15 @@ const Dropdown = ({ type, setSelectedValue }: Props) => {
   return (
     <div className={css.dropdown} onClick={openDropdown}>
       <div className={css.closed}>
-        <span>선택해주세요</span> <span>▼</span>
+        {selectedValue ? (
+          <div className={css.selectValue}>
+            <span>{selectedValue}</span> <span>▼</span>
+          </div>
+        ) : (
+          <div className={css.selectValue}>
+            <span>선택해주세요</span> <span>▼</span>
+          </div>
+        )}
       </div>
       <div className={`${css.options} ${isOpen === false ? css.open : ''}`}>
         {isOpen

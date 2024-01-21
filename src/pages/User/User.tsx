@@ -31,6 +31,7 @@ interface ShopType {
 const User = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({});
   const [isOpenMakeProfile, setIsOpenMakeProfile] = useState(false);
+  const [haveProfile, setHaveProfile] = useState<boolean>(false);
 
   useEffect(() => {
     getAxios(`users/${localStorage.getItem('userId')}`).then(res =>
@@ -40,12 +41,13 @@ const User = () => {
 
   return (
     <section className={css.container}>
-      {userInfo && userInfo.name ? (
+      {userInfo && haveProfile ? (
         <ExistingProfile />
       ) : isOpenMakeProfile ? (
         <MakeProfile
           setIsOpenMakeProfile={setIsOpenMakeProfile}
           userInfo={userInfo}
+          setHaveProfile={setHaveProfile}
         />
       ) : (
         <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />

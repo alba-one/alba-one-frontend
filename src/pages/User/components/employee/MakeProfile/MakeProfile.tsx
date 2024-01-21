@@ -4,10 +4,12 @@ import Dropdown from '@_components/Dropdown/Dropdown';
 import css from './MakeProfile.module.scss';
 import { useEffect, useState } from 'react';
 import { putAxios } from '@_lib/axios';
+import Modal from '@_components/Modal';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
-
+  setHaveProfile: (value: boolean) => void;
   userInfo: {
     id: string;
     email: string;
@@ -19,8 +21,15 @@ interface Props {
   };
 }
 
-const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
+const MakeProfile = ({
+  setIsOpenMakeProfile,
+  userInfo,
+  setHaveProfile,
+}: Props) => {
   const userId = userInfo.id;
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [selectedValue, setSelectedValue] = useState<string | null>();
   const [userInput, setUserInput] = useState<{
@@ -29,23 +38,45 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
     address?: string;
     bio?: string;
   }>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalInfo, setModalInfo] = useState<{
+    type: string;
+    desc: string;
+    status: string;
+  }>({ type: '', desc: '', status: '' });
 
   const putUserInput = (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     const url = `/users/${userId}`;
 
     putAxios(url, userInput)
       .then(res => {
-        console.log(res);
+        if (res.data.item.name) {
+          setModalInfo({
+            type: 'caution',
+            desc: '프로필 등록이 완료되었습니다.',
+            status: 'success',
+          });
+
+          setIsModalOpen(prev => !prev);
+        }
       })
-      .catch(() => {})
+      .catch(error => {
+        setModalInfo({
+          type: 'caution',
+          desc: error.response.data.message,
+          status: 'fail',
+        });
+
+        setIsModalOpen(prev => !prev);
+      })
       .finally(() => {});
   };
 
   const saveAddress = (selectedValue: string) => {
-    setUserInput(prevUserInput => ({
-      ...prevUserInput,
+    setUserInput(prev => ({
+      ...prev,
       address: selectedValue,
     }));
   };
@@ -54,14 +85,20 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
     saveAddress(selectedValue);
   }, [selectedValue]);
 
-  console.log(userInput);
+  const confirmModal = () => {
+    if (modalInfo.status === 'success') {
+      setIsModalOpen(prev => !prev);
+      setHaveProfile(true);
+    } else {
+      setIsModalOpen(prev => !prev);
+    }
+  };
 
   return (
     <section className={css.makeProfile}>
       <form
         onSubmit={e => {
-          e.preventDefault();
-          putUserInput(userInput);
+          putUserInput(e);
         }}
       >
         <div className={css.title}>
@@ -77,8 +114,8 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
               className={css.miniInput}
               placeholder="입력해주세요."
               onChange={({ target: { value } }) => {
-                setUserInput(prevUserInput => ({
-                  ...prevUserInput,
+                setUserInput(prev => ({
+                  ...prev,
                   name: value,
                 }));
               }}
@@ -93,8 +130,8 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
               className={css.miniInput}
               placeholder="입력해주세요."
               onChange={({ target: { value } }) => {
-                setUserInput(prevUserInput => ({
-                  ...prevUserInput,
+                setUserInput(prev => ({
+                  ...prev,
                   phone: value,
                 }));
               }}
@@ -106,7 +143,11 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
           <div className={css.userLocation}>
             <div className={css.subTitle}>선호 지역*</div>
             <div className={css.selectBox}>
-              <Dropdown type="address" setSelectedValue={setSelectedValue} />
+              <Dropdown
+                type="address"
+                selectedValue={selectedValue}
+                setSelectedValue={setSelectedValue}
+              />
             </div>
           </div>
 
@@ -116,8 +157,8 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
               className={css.comments}
               placeholder="입력해주세요."
               onChange={({ target: { value } }) => {
-                setUserInput(prevUserInput => ({
-                  ...prevUserInput,
+                setUserInput(prev => ({
+                  ...prev,
                   bio: value,
                 }));
               }}
@@ -125,15 +166,18 @@ const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
           </div>
         </div>
 
-        <button
-          className={css.submitBtn}
-          onClick={() => {
-            putUserInput(userInput);
-          }}
-        >
-          등록하기
-        </button>
+        <button className={css.submitBtn}>등록하기</button>
       </form>
+      {isModalOpen && (
+        <Modal
+          setIsModalOpen={setIsModalOpen}
+          positiveFunc={() => {
+            confirmModal();
+          }}
+          type={modalInfo.type}
+          desc={modalInfo.desc}
+        />
+      )}
     </section>
   );
 };
