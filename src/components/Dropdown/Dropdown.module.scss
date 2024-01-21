@@ -18,8 +18,20 @@
   border-radius: 6px;
 }
 
+.open {
+  display: none;
+}
+
+.selectValue {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
 .options {
-  overflow: hidden;
+  height: 364px;
+  overflow: scroll;
   margin-top: 10px;
   background-color: $white;
 
