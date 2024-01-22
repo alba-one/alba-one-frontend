@@ -1,23 +1,17 @@
+import { useCallback, useRef, useState } from 'react';
+import { putAxios } from '@_lib/axios';
+
 import Icon from '@_components/Icon';
 import Dropdown from '@_components/Dropdown/Dropdown';
 
+import { UserInfo } from '@_types/userType';
 import css from './MakeStore.module.scss';
-import { useCallback, useState } from 'react';
-import { putAxios } from '@_lib/axios';
 import Modal from '@_components/Modal';
 
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
   setHaveProfile: (value: boolean) => void;
-  userInfo: {
-    id: string;
-    email: string;
-    type: 'employer' | 'employee';
-    name?: string;
-    phone?: string;
-    address?: string;
-    bio?: string;
-  };
+  userInfo: UserInfo;
 }
 
 const MakeStore = ({

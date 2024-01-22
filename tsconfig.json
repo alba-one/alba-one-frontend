@@ -27,7 +27,8 @@
       "@_assets/*": ["src/assets/*"],
       "@_styles/*": ["src/styles/*"],
       "@_lib/*": ["src/lib/*"],
-      "@_hooks/*": ["src/hooks/*"]
+      "@_hooks/*": ["src/hooks/*"],
+      "@_types/*": ["src/types/*"]
     }
   },
   "include": ["src"],

@@ -2,11 +2,11 @@
 @import '@_styles/typos';
 
 .container {
+  @include body2;
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 0px;
-
-  @include body2;
+  height: 85vh;
 }
 
 .title {
