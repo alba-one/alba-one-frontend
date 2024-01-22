@@ -1,0 +1,129 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.userForm {
+  display: grid;
+  grid-template-areas:
+    'inputbox inputbox'
+    'inputbox inputbox'
+    'detail image'
+    'detail image'
+    'button button';
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 2fr 1fr;
+  gap: 20px;
+  width: 100%;
+  height: 700px;
+}
+
+.inputBox {
+  grid-area: inputbox;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+.detailBox {
+  grid-area: detail;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  gap: 20px;
+}
+
+.imageBox {
+  grid-area: image;
+}
+
+.subTitle {
+  @include body2;
+  margin-bottom: 8px;
+}
+
+.miniInput {
+  @include body2;
+  padding: 0 24px;
+  width: 100%;
+  height: 60px;
+  border-radius: 6px;
+  border: 1px solid $gray_30;
+  background-color: white;
+}
+
+.selectBox {
+  @include body2;
+  height: 60px;
+  border-radius: 6px;
+  border: 1px solid $gray_30;
+  background-color: white;
+}
+
+.commentBox {
+  width: 100%;
+}
+
+.comments {
+  @include body2;
+  width: 100%;
+  height: 160px;
+  padding: 16px 24px;
+
+  border-radius: 6px;
+  border: 1px solid $gray_30;
+
+  resize: none;
+}
+
+.buttonBox {
+  grid-area: button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.submitBtn {
+  @include h4;
+  width: 30%;
+  height: 50px;
+
+  border: none;
+  border-radius: 6px;
+  background-color: $red_40;
+  color: $white;
+
+  cursor: pointer;
+}
+
+.imageInputBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  width: 100%;
+  height: 283px;
+  background-color: $gray_10;
+  border: 1px solid $gray_30;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.imageLabel {
+  margin-top: 10px;
+  @include body3;
+  color: $gray_50;
+}
+.imageInput {
+  display: none;
+}
+.message {
+  margin-top: 10px;
+}
+.moreText {
+  margin-top: 26px;
+}
+.preview {
+  width: 100%;
+  height: 100%;
+}

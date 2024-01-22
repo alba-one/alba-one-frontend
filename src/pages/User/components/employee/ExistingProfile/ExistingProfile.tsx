@@ -1,33 +1,18 @@
 import Icon from '@_components/Icon';
-import css from './ExistingProfile.module.scss';
 import None from './Components/None/None.tsx';
 import ApplyBox from './Components/ApplyBox/ApplyBox.tsx';
+import { UserInfo } from '@_types/userType';
+
+import css from './ExistingProfile.module.scss';
+import { useGetUserType } from '@_hooks/useGetUserType.ts';
 
 interface Props {
-  userInfo: {
-    id: string;
-    email: string;
-    type: 'employer' | 'employee';
-    name?: string;
-    phone?: string;
-    address?: string;
-    bio?: string;
-    shop?: ShopType[];
-  };
-}
-
-interface ShopType {
-  id: string;
-  name: string;
-  category: string;
-  address1: string;
-  address2: string;
-  description: string;
-  imageUrl: string;
-  originalHourlyPay: number;
+  userInfo: UserInfo;
 }
 
 const ExistingProfile = ({ userInfo }: Props) => {
+  const { isEmployee } = useGetUserType();
+
   let phoneNum = '';
 
   const makePhoneNumForm = () => {
@@ -46,20 +31,25 @@ const ExistingProfile = ({ userInfo }: Props) => {
   return (
     <section className={css.existingProfile}>
       <div className={css.container}>
-        <div className={css.title}>내 프로필</div>
+        <div className={css.title}>{isEmployee ? '내 프로필' : '내 가게'}</div>
         <div className={css.userCard}>
           <div className={css.userInfo}>
             <div className={css.user}>
-              <div className={css.subTitle}>이름</div>
+              <div className={css.subTitle}>{isEmployee ? '이름' : '식당'}</div>
               <div className={css.userName}>{userInfo.name}</div>
             </div>
-            <div className={css.detailInfo}>
-              <Icon title="phone" />
-              <span className={css.number}>{phoneNum}</span>
-            </div>
+            {isEmployee && (
+              <div className={css.detailInfo}>
+                <Icon title="phone" />
+                <span className={css.number}>{phoneNum}</span>
+              </div>
+            )}
             <div className={css.detailInfo}>
               <Icon title="location" />
-              <span className={css.location}>선호지역: {userInfo.address}</span>
+              <span className={css.location}>
+                {isEmployee && '선호지역: '}
+                {userInfo.address}
+              </span>
             </div>
             <div className={css.comment}>{userInfo.bio}</div>
           </div>

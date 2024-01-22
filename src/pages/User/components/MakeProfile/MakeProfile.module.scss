@@ -1,0 +1,26 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.container {
+  position: relative;
+  background-color: $gray_5;
+  height: 85vh;
+  z-index: 2;
+}
+
+.contentWrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 60px 0;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.title {
+  @include h1;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  width: 100%;
+}

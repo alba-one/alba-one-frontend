@@ -1,90 +1,48 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAxios } from '@_lib/axios';
-import ExistingProfile from './components/employee/ExistingProfile/ExistingProfile.tsx';
-import MakeProfile from './components/employee/MakeProfile/MakeProfile.tsx';
-import RegistUser from './components/employee/RegistUser/RegistUser.tsx';
 
-import css from './User.module.scss';
+import RegistUser from './components/RegistUser';
+import ExistingProfile from './components/employee/ExistingProfile/ExistingProfile.tsx';
+import MakeProfile from './components/MakeProfile';
+
 import ExistingStore from './components/employer/ExistingStore/ExistingStore.tsx';
 import MakeStore from './components/employer/MakeStore/MakeStore.tsx';
 
-interface UserInfo {
-  id: string;
-  email: string;
-  type: 'employer' | 'employee';
-  name?: string;
-  phone?: string;
-  address?: string;
-  bio?: string;
-  shop?: ShopType[];
-}
-
-interface ShopType {
-  id: string;
-  name: string;
-  category: string;
-  address1: string;
-  address2: string;
-  description: string;
-  imageUrl: string;
-  originalHourlyPay: number;
-}
+import { UserInfo } from '@_types/userType';
+import css from './User.module.scss';
 
 const User = () => {
-  const [userInfo, setUserInfo] = useState<UserInfo>({});
   const [isOpenMakeProfile, setIsOpenMakeProfile] = useState(false);
-  const [haveProfile, setHaveProfile] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    id: '',
+    email: '',
+    type: '',
+    shop: null,
+  });
 
   useEffect(() => {
     getAxios(`users/${localStorage.getItem('userId')}`).then(res =>
       setUserInfo(res.data.item)
     );
-  }, []);
-
-  const checkUserType = (userInfo: UserInfo) => {
-    if (userInfo && userInfo.type === 'employee') {
-      if (userInfo.name) {
-        return <ExistingProfile userInfo={userInfo} />;
-      }
-      if (!userInfo.name && isOpenMakeProfile) {
-        return (
-          <MakeProfile
-            setIsOpenMakeProfile={setIsOpenMakeProfile}
-            userInfo={userInfo}
-            setHaveProfile={setHaveProfile}
-          />
-        );
-      } else {
-        return <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />;
-      }
-    }
-
-    if (userInfo && userInfo.type === 'employer') {
-      if (userInfo.name) {
-        <ExistingStore />;
-      }
-      if (!userInfo.name && isOpenMakeProfile) {
-        return (
-          <MakeStore
-            setIsOpenMakeProfile={setIsOpenMakeProfile}
-            userInfo={userInfo}
-            setHaveProfile={setHaveProfile}
-          />
-        );
-      } else {
-        return <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />;
-      }
-    }
-  };
-
-  const memoizedCheckUserType = useMemo(
-    () => checkUserType(userInfo),
-    [userInfo, isOpenMakeProfile]
-  );
+  }, [isOpenMakeProfile]);
 
   if (!userInfo) return null;
 
-  return <section className={css.container}>{memoizedCheckUserType}</section>;
+  return (
+    <section className={css.container}>
+      {!userInfo.name && !isOpenMakeProfile && (
+        <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
+      )}
+      {isOpenMakeProfile && (
+        <MakeProfile
+          setIsOpenMakeProfile={setIsOpenMakeProfile}
+          userInfo={userInfo}
+          setHaveProfile={setHaveProfile}
+        />
+      )}
+      {userInfo.name && <ExistingProfile userInfo={userInfo} />}
+    </section>
+  );
 };
 
 export default User;

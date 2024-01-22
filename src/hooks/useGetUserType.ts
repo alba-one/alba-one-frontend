@@ -6,16 +6,18 @@ export const useGetUserType = () => {
   const [userType, setUserType] = useState({
     type: '',
     isEmployee: false,
+    userId: '',
   });
 
-  const { type, isEmployee } = userType;
+  const { type, isEmployee, userId } = userType;
 
   useEffect(() => {
     setUserType({
       type: localStorage.getItem('type') || '',
       isEmployee: localStorage.getItem('type') === 'employee',
+      userId: localStorage.getItem('userId') || '',
     });
   }, [location.pathname]);
 
-  return { type, isEmployee };
+  return { type, isEmployee, userId };
 };

@@ -18,6 +18,7 @@ export default defineConfig({
       { find: '@_styles', replacement: resolve(__dirname, 'src/styles') },
       { find: '@_lib', replacement: resolve(__dirname, 'src/lib') },
       { find: '@_hooks', replacement: resolve(__dirname, 'src/hooks') },
+      { find: '@_types', replacement: resolve(__dirname, 'src/types') },
     ],
   },
   plugins: [react()],

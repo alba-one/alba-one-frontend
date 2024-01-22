@@ -1,45 +1,48 @@
-import Icon from '@_components/Icon';
-import Dropdown from '@_components/Dropdown/Dropdown';
-
-import css from './MakeProfile.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { putAxios } from '@_lib/axios';
+import { useGetUserType } from '@_hooks/useGetUserType';
+
+import Icon from '@_components/Icon';
+import Dropdown from '@_components/Dropdown';
 import Modal from '@_components/Modal';
+
+import { UserInfo } from '@_types/userType';
+import css from './MakeProfile.module.scss';
 
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
   setHaveProfile: (value: boolean) => void;
-  userInfo: {
-    id: string;
-    email: string;
-    type: 'employer' | 'employee';
-    name?: string;
-    phone?: string;
-    address?: string;
-    bio?: string;
-  };
+  userInfo: UserInfo;
 }
 
 const MakeProfile = ({
   setIsOpenMakeProfile,
-  userInfo,
   setHaveProfile,
+  userInfo,
 }: Props) => {
-  const userId = userInfo.id;
-
   const [selectedValue, setSelectedValue] = useState<string>('');
-  const [userInput, setUserInput] = useState<{
-    name: string;
-    phone: string;
-    address: string;
-    bio: string;
-  }>({ name: '', phone: '', address: '', bio: '' });
+  const [userInput, setUserInput] = useState<UserInfo>({
+    name: '',
+    phone: '',
+    address: '',
+    bio: '',
+  });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<{
     type: string;
     desc: string;
     status: string;
   }>({ type: '', desc: '', status: '' });
+
+  const { isEmployee } = useGetUserType();
+  const userId = userInfo.id;
+
+  const handleUserProfile = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setUserInput(prev => ({ ...prev, [name]: value }));
+  };
 
   const putUserInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,64 +69,57 @@ const MakeProfile = ({
         });
 
         setIsModalOpen(prev => !prev);
-      })
-      .finally(() => {});
+      });
   };
 
   const confirmModal = () => {
     if (modalInfo.status === 'success') {
       setIsModalOpen(prev => !prev);
       setHaveProfile(true);
+      setIsOpenMakeProfile(prev => !prev);
     } else {
       setIsModalOpen(prev => !prev);
     }
   };
 
   return (
-    <section className={css.makeProfile}>
+    // <section className={css.makeProfile}>
+    <section className={css.container}>
       <form
+        className={css.form}
         onSubmit={e => {
           putUserInput(e);
         }}
       >
         <div className={css.title}>
-          내 프로필
-          <div onClick={() => setIsOpenMakeProfile(prev => !prev)}>
-            <Icon title="close" />
-          </div>
+          <h2>{isEmployee ? '내 프로필' : '내 가게'}</h2>
+          <Icon
+            title="close"
+            handleIcon={() => setIsOpenMakeProfile(prev => !prev)}
+          />
         </div>
         <div className={css.inputs}>
           <div className={css.userName}>
             <div className={css.subTitle}>이름*</div>
             <input
               className={css.miniInput}
+              name="name"
               placeholder="입력해주세요."
-              onChange={({ target: { value } }) => {
-                setUserInput(prev => ({
-                  ...prev,
-                  name: value,
-                }));
-              }}
+              onChange={handleUserProfile}
+              required
             />
           </div>
-
-          <div />
 
           <div className={css.userContact}>
             <div className={css.subTitle}>연락처*</div>
             <input
               className={css.miniInput}
+              name="phone"
               placeholder="입력해주세요."
-              onChange={({ target: { value } }) => {
-                setUserInput(prev => ({
-                  ...prev,
-                  phone: value,
-                }));
-              }}
+              onChange={handleUserProfile}
+              required
             />
           </div>
-
-          <div />
 
           <div className={css.userLocation}>
             <div className={css.subTitle}>선호 지역*</div>
@@ -140,14 +136,11 @@ const MakeProfile = ({
             <div className={css.subTitle}>소개</div>
             <textarea
               className={css.comments}
+              name="bio"
               placeholder="입력해주세요."
-              onChange={({ target: { value } }) => {
-                setUserInput(prev => ({
-                  ...prev,
-                  bio: value,
-                }));
-              }}
-            ></textarea>
+              onChange={handleUserProfile}
+              required
+            />
           </div>
         </div>
 
@@ -156,9 +149,7 @@ const MakeProfile = ({
       {isModalOpen && (
         <Modal
           setIsModalOpen={setIsModalOpen}
-          positiveFunc={() => {
-            confirmModal();
-          }}
+          positiveFunc={confirmModal}
           type={modalInfo.type}
           desc={modalInfo.desc}
         />
