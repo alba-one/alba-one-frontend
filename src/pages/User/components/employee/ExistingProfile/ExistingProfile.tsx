@@ -41,8 +41,6 @@ const ExistingProfile = ({ userInfo }: Props) => {
 
   makePhoneNumForm();
 
-  console.log(userInfo);
-
   const goToEdit = () => {};
 
   return (

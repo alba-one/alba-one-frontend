@@ -3,8 +3,8 @@ import css from './Dropdown.module.scss';
 
 interface Props {
   type: string;
-  selectedValue: string | null;
-  setSelectedValue: (value: string | null) => void;
+  selectedValue: string;
+  setSelectedValue: (value: string) => void;
 }
 const Dropdown = ({ type, selectedValue, setSelectedValue }: Props) => {
   const addressArr = [
@@ -35,12 +35,26 @@ const Dropdown = ({ type, selectedValue, setSelectedValue }: Props) => {
     '서울시 강동구',
   ];
 
+  const categoryArr = [
+    '한식',
+    '중식',
+    '일식',
+    '양식',
+    '분식',
+    '카페',
+    '편의점',
+    '기타',
+  ];
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [dropdownType, setDropdownType] = useState<string[]>([]);
 
   useEffect(() => {
     if (type === 'address') {
       setDropdownType(addressArr);
+    }
+    if (type === 'category') {
+      setDropdownType(categoryArr);
     }
   }, []);
 
