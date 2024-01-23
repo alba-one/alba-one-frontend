@@ -49,6 +49,7 @@ const Dropdown = ({ type, selectedValue, setSelectedValue }: Props) => {
     if (type === 'address') {
       setSelectedValue(prev => ({
         ...prev,
+        address: value,
         address1: value,
       }));
     }

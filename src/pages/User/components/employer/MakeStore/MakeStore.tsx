@@ -107,6 +107,8 @@ const MakeStore = ({
     }
   };
 
+  console.log(userInput);
+
   return (
     <section className={css.makeStore}>
       <form

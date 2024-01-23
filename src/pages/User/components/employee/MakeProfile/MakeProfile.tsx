@@ -70,17 +70,6 @@ const MakeProfile = ({
       .finally(() => {});
   };
 
-  const saveAddress = (selectedValue: string) => {
-    setUserInput(prev => ({
-      ...prev,
-      address: selectedValue,
-    }));
-  };
-
-  useEffect(() => {
-    saveAddress(selectedValue);
-  }, [selectedValue]);
-
   const confirmModal = () => {
     if (modalInfo.status === 'success') {
       setIsModalOpen(prev => !prev);
@@ -141,8 +130,8 @@ const MakeProfile = ({
             <div className={css.selectBox}>
               <Dropdown
                 type="address"
-                selectedValue={selectedValue}
-                setSelectedValue={setSelectedValue}
+                selectedValue={userInput?.address}
+                setSelectedValue={setUserInput}
               />
             </div>
           </div>
