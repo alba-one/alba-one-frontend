@@ -1,100 +1,77 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { categoryList, addressList } from '@_constants/dropdownList';
+
 import css from './Dropdown.module.scss';
 
 interface Props {
   type: string;
   selectedValue: string;
-  setSelectedValue: (value: string) => void;
+  setSelectedValue: React.Dispatch<React.SetStateAction<UserInfo>>;
 }
+
+interface UserInfo {
+  name: string;
+  phone: string;
+  address: string;
+  bio: string;
+}
+
+interface List {
+  [key: string]: string[];
+}
+
 const Dropdown = ({ type, selectedValue, setSelectedValue }: Props) => {
-  const addressArr = [
-    '서울시 종로구',
-    '서울시 중구',
-    '서울시 용산구',
-    '서울시 성동구',
-    '서울시 광진구',
-    '서울시 동대문구',
-    '서울시 중랑구',
-    '서울시 성북구',
-    '서울시 강북구',
-    '서울시 도봉구',
-    '서울시 노원구',
-    '서울시 은평구',
-    '서울시 서대문구',
-    '서울시 마포구',
-    '서울시 양천구',
-    '서울시 강서구',
-    '서울시 구로구',
-    '서울시 금천구',
-    '서울시 영등포구',
-    '서울시 동작구',
-    '서울시 관악구',
-    '서울시 서초구',
-    '서울시 강남구',
-    '서울시 송파구',
-    '서울시 강동구',
-  ];
-
-  const categoryArr = [
-    '한식',
-    '중식',
-    '일식',
-    '양식',
-    '분식',
-    '카페',
-    '편의점',
-    '기타',
-  ];
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [dropdownType, setDropdownType] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (type === 'address') {
-      setDropdownType(addressArr);
-    }
-    if (type === 'category') {
-      setDropdownType(categoryArr);
-    }
-  }, []);
+  const dropdownList: List = {
+    category: categoryList,
+    address: addressList,
+  };
 
   const openDropdown = () => {
     setIsOpen(prev => !prev);
   };
 
   const handleUserValue = (
-    value: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement>,
+    value: string,
+    type: string
   ) => {
-    const selectedOption = value.currentTarget.textContent;
+    e.stopPropagation();
 
-    setSelectedValue(selectedOption);
-    value.stopPropagation();
+    // setSelectedValue(prev => ({ ...prev, address: value }));
 
+    if (type === 'category') {
+      setSelectedValue(prev => ({
+        ...prev,
+        category: value,
+      }));
+    }
+    if (type === 'address') {
+      setSelectedValue(prev => ({
+        ...prev,
+        address1: value,
+      }));
+    }
     setIsOpen(prev => !prev);
   };
 
   return (
     <div className={css.dropdown} onClick={openDropdown}>
       <div className={css.closed}>
-        {selectedValue ? (
-          <div className={css.selectValue}>
-            <span>{selectedValue}</span> <span>▼</span>
-          </div>
-        ) : (
-          <div className={css.selectValue}>
-            <span>선택해주세요</span> <span>▼</span>
-          </div>
-        )}
+        <div className={css.selectValue}>
+          <span>{selectedValue ? selectedValue : '선택해주세요'}</span>
+          <span>▼</span>
+        </div>
       </div>
-      <div className={`${css.options} ${isOpen === false ? css.open : ''}`}>
+      <div className={`${css.options} ${isOpen ? '' : css.open}`}>
         {isOpen
-          ? dropdownType.map((el, idx) => {
+          ? dropdownList[type]?.map((el, idx) => {
               return (
                 <div
                   key={idx}
                   className={css.option}
-                  onClick={el => {
-                    handleUserValue(el);
+                  onClick={e => {
+                    handleUserValue(e, el, type);
                   }}
                 >
                   {el}

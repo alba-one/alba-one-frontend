@@ -9,7 +9,7 @@ const RegistUser = ({ setIsOpenMakeProfile }: Props) => {
   const { isEmployee } = useGetUserType();
 
   return (
-    <section className={css.none}>
+    <section className={css.container}>
       <div className={css.title}>{isEmployee ? '내 프로필' : '내 가게'}</div>
       <div className={css.noCard}>
         <div className={css.comment}>
