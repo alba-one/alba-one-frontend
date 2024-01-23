@@ -2,8 +2,9 @@ import Icon from '@_components/Icon';
 import Dropdown from '@_components/Dropdown/Dropdown';
 
 import css from './MakeStore.module.scss';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { putAxios } from '@_lib/axios';
+import Modal from '@_components/Modal';
 
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,18 +25,8 @@ const MakeStore = ({
   setHaveProfile,
   userInfo,
 }: Props) => {
-  const userId = userInfo.id;
+  const shopId = userInfo.id;
 
-  const [selectedValue, setSelectedValue] = useState<string | null>();
-  const [userInput, setUserInput] = useState<{
-    name?: string;
-    category?: string;
-    address1?: string;
-    address2?: string;
-    description?: string;
-    imageUrl?: string;
-    originalHourlyPay?: number;
-  }>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<{
     type: string;
@@ -43,15 +34,31 @@ const MakeStore = ({
     status: string;
   }>({ type: '', desc: '', status: '' });
 
-  let uploadImageName = '';
+  const [selectedValue, setSelectedValue] = useState<string>('');
+  const [userInput, setUserInput] = useState<{
+    name: string;
+    category: string;
+    address1: string;
+    address2: string;
+    description: string;
+    imageUrl: string;
+    originalHourlyPay: number;
+  }>({
+    name: '',
+    category: '',
+    address1: '',
+    address2: '',
+    description: '',
+    imageUrl: '',
+    originalHourlyPay: 0,
+  });
 
-  console.log(userInput);
-  console.log(uploadImageName);
+  const [userImage, setUserImage] = useState<File | null>(null);
 
   const putUserInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = `/shops/${userId}`;
+    const url = `/shops/${shopId}`;
 
     putAxios(url, userInput)
       .then(res => {
@@ -81,8 +88,26 @@ const MakeStore = ({
     if (!e.target.files) {
       return;
     }
-    uploadImageName = e.target.files[0].name;
+
+    const file = e.target.files[0];
+    setUserImage(file);
+
+    setUserInput(prev => ({
+      ...prev,
+      imageUrl: URL.createObjectURL(file),
+    }));
   }, []);
+
+  const confirmModal = () => {
+    if (modalInfo.status === 'success') {
+      setIsModalOpen(prev => !prev);
+      setHaveProfile(true);
+    } else {
+      setIsModalOpen(prev => !prev);
+    }
+  };
+
+  console.log(userInput);
 
   return (
     <section className={css.makeStore}>
@@ -118,8 +143,8 @@ const MakeStore = ({
             <div className={css.selectBox}>
               <Dropdown
                 type="category"
-                selectedValue={selectedValue}
-                setSelectedValue={setSelectedValue}
+                selectedValue={userInput?.category}
+                setSelectedValue={setUserInput}
               />
             </div>
           </div>
@@ -129,8 +154,8 @@ const MakeStore = ({
             <div className={css.selectBox}>
               <Dropdown
                 type="address"
-                selectedValue={selectedValue}
-                setSelectedValue={setSelectedValue}
+                selectedValue={userInput?.address1}
+                setSelectedValue={setUserInput}
               />
             </div>
           </div>
@@ -185,22 +210,11 @@ const MakeStore = ({
 
           <div />
 
-          {/* <form method="post" enctype="multipart/form-data">
-            <div class="button">
-             <label for="chooseFile">
-            👉 CLICK HERE! 👈
-             </label>
-            </div>
-           <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-          </form> */}
-
           <div className={css.addImage}>
             <div className={css.subTitle}>가게 이미지</div>
             <form method="post" encType="multipart/form-data">
               <label className={css.imageLabel}>
                 <div className={css.imageInputBox}>
-                  <Icon title="camera" />
-                  <div className={css.message}> 이미지 추가하기</div>
                   <input
                     type="file"
                     className={css.imageInput}
@@ -209,7 +223,18 @@ const MakeStore = ({
                       uploadImage(e);
                     }}
                   />
-                  {/* <img src="" alt="미리보기 이미지" className={css.preview} /> */}
+                  {userInput.imageUrl ? (
+                    <img
+                      src={userInput.imageUrl}
+                      alt="미리보기 이미지"
+                      className={css.preview}
+                    />
+                  ) : (
+                    <div>
+                      <Icon title="camera" />
+                      <div className={css.message}> 이미지 추가하기</div>
+                    </div>
+                  )}
                 </div>
               </label>
             </form>
@@ -222,6 +247,16 @@ const MakeStore = ({
 
         <button className={css.submitBtn}>등록하기</button>
       </form>
+      {isModalOpen && (
+        <Modal
+          setIsModalOpen={setIsModalOpen}
+          positiveFunc={() => {
+            confirmModal();
+          }}
+          type={modalInfo.type}
+          desc={modalInfo.desc}
+        />
+      )}
     </section>
   );
 };

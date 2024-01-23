@@ -5,7 +5,6 @@ import css from './MakeProfile.module.scss';
 import { useEffect, useState } from 'react';
 import { putAxios } from '@_lib/axios';
 import Modal from '@_components/Modal';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,16 +27,13 @@ const MakeProfile = ({
 }: Props) => {
   const userId = userInfo.id;
 
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const [selectedValue, setSelectedValue] = useState<string | null>();
+  const [selectedValue, setSelectedValue] = useState<string>('');
   const [userInput, setUserInput] = useState<{
-    name?: string;
-    phone?: string;
-    address?: string;
-    bio?: string;
-  }>();
+    name: string;
+    phone: string;
+    address: string;
+    bio: string;
+  }>({ name: '', phone: '', address: '', bio: '' });
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<{
     type: string;
@@ -73,17 +69,6 @@ const MakeProfile = ({
       })
       .finally(() => {});
   };
-
-  const saveAddress = (selectedValue: string) => {
-    setUserInput(prev => ({
-      ...prev,
-      address: selectedValue,
-    }));
-  };
-
-  useEffect(() => {
-    saveAddress(selectedValue);
-  }, [selectedValue]);
 
   const confirmModal = () => {
     if (modalInfo.status === 'success') {
@@ -145,8 +130,8 @@ const MakeProfile = ({
             <div className={css.selectBox}>
               <Dropdown
                 type="address"
-                selectedValue={selectedValue}
-                setSelectedValue={setSelectedValue}
+                selectedValue={userInput?.address}
+                setSelectedValue={setUserInput}
               />
             </div>
           </div>
