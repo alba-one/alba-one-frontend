@@ -2,8 +2,8 @@ import Icon from '@_components/Icon';
 import Dropdown from '@_components/Dropdown/Dropdown';
 
 import css from './MakeStore.module.scss';
-import { useCallback, useState } from 'react';
-import { putAxios } from '@_lib/axios';
+import { useState } from 'react';
+import { getAxios, postAxios, putAxios } from '@_lib/axios';
 import Modal from '@_components/Modal';
 
 interface Props {
@@ -53,14 +53,57 @@ const MakeStore = ({
     originalHourlyPay: 0,
   });
 
-  const [userImage, setUserImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>('');
 
-  const putUserInput = (e: React.FormEvent<HTMLFormElement>) => {
+  const postUserImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
+
+    const file = e.target.files[0];
+
+    const imageName = file.name;
+
+    const url = '/images';
+
+    await postAxios(url, { name: imageName })
+      .then(res => {
+        setImageUrl(res.data.item.url);
+        const urlObject = new URL(res.data.item.url);
+
+        const urlWithoutQuery = urlObject.origin + urlObject.pathname;
+
+        console.log(urlWithoutQuery);
+
+        // const formData = new FormData();
+        // if (urlObject) {
+        //   formData.append('file', urlObject);
+        // }
+
+        // // Append other form data
+        // for (const key in userInput) {
+        //   formData.append(key, urlObject[key]);
+        // }
+
+        putAxios(res.data.item.url, file);
+      })
+      .catch(error => {
+        setModalInfo({
+          type: 'caution',
+          desc: '이미지를 다시 넣어주세요',
+          status: 'fail',
+        });
+
+        setIsModalOpen(prev => !prev);
+      });
+  };
+
+  const postUserInput = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const url = `/shops/${shopId}`;
 
-    putAxios(url, userInput)
+    postAxios(url, userInput)
       .then(res => {
         if (res.data.item.name) {
           setModalInfo({
@@ -84,20 +127,6 @@ const MakeStore = ({
       .finally(() => {});
   };
 
-  const uploadImage = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
-      return;
-    }
-
-    const file = e.target.files[0];
-    setUserImage(file);
-
-    setUserInput(prev => ({
-      ...prev,
-      imageUrl: URL.createObjectURL(file),
-    }));
-  }, []);
-
   const confirmModal = () => {
     if (modalInfo.status === 'success') {
       setIsModalOpen(prev => !prev);
@@ -114,7 +143,7 @@ const MakeStore = ({
       <form
         className={css.form}
         onSubmit={e => {
-          putUserInput(e);
+          postUserInput(e);
         }}
       >
         <div className={css.title}>
@@ -220,12 +249,12 @@ const MakeStore = ({
                     className={css.imageInput}
                     accept="image/*"
                     onChange={e => {
-                      uploadImage(e);
+                      postUserImage(e);
                     }}
                   />
-                  {userInput.imageUrl ? (
+                  {imageUrl ? (
                     <img
-                      src={userInput.imageUrl}
+                      src={imageUrl}
                       alt="미리보기 이미지"
                       className={css.preview}
                     />

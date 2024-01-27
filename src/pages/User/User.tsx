@@ -41,6 +41,12 @@ const User = () => {
     );
   }, []);
 
+  const editProfile = () => {
+    if (userInfo && userInfo.name && isOpenMakeProfile) {
+      setIsOpenMakeProfile(prev => !prev);
+    }
+  };
+
   const checkUserType = (userInfo: UserInfo) => {
     if (userInfo && userInfo.type === 'employee') {
       if (userInfo.name) {
