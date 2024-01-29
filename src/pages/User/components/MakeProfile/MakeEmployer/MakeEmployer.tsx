@@ -1,10 +1,9 @@
 import { useState } from 'react';
+import { postAxios } from '@_lib/axios';
 import InputBox from '@_components/InputBox';
 
-import css from './MakeEmployer.module.scss';
-import Icon from '@_components/Icon';
-import { postAxios, putAxios } from '@_lib/axios';
 import { ModalType } from '@_types/ModalType';
+import css from './MakeEmployer.module.scss';
 
 interface Props {
   handleModal: ({ type, desc, status }: ModalType) => void;
@@ -171,7 +170,9 @@ const MakeEmployer = ({ handleModal }: Props) => {
         />
       </div>
       <div className={css.buttonBox}>
-        <button className={css.submitBtn}>등록하기</button>
+        <button className={css.submitBtn} onClick={putUserInput}>
+          등록하기
+        </button>
       </div>
     </form>
   );

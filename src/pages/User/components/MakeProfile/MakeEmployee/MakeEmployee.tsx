@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useGetUserType } from '@_hooks/useGetUserType';
 import { putAxios } from '@_lib/axios';
 
-import Dropdown from '@_components/Dropdown';
 import InputBox from '@_components/InputBox';
 
 import { ModalType } from '@_types/ModalType';

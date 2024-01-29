@@ -1,0 +1,44 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.container {
+}
+
+.title {
+  @include h1;
+}
+
+.employeeBox {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 0 auto;
+  padding: 60px 0;
+  max-width: 1200px;
+}
+
+.employerBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 60px 0;
+  max-width: 1200px;
+}
+
+.cardBox {
+  border-radius: 12px;
+  background-color: $red_10;
+}
+
+.listBackround {
+  padding: 60px 0 120px;
+  background-color: $gray_10;
+}
+
+.listBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  max-width: 1200px;
+}

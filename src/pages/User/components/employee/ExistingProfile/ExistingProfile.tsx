@@ -1,10 +1,12 @@
 import Icon from '@_components/Icon';
 import None from './Components/None/None.tsx';
 import ApplyBox from './Components/ApplyBox/ApplyBox.tsx';
+
+import { useGetUserType } from '@_hooks/useGetUserType.ts';
+import { changePhoneNumFormat } from '@_utils/formatPhoneNum';
 import { UserInfo } from '@_types/userType';
 
 import css from './ExistingProfile.module.scss';
-import { useGetUserType } from '@_hooks/useGetUserType.ts';
 
 interface Props {
   userInfo: UserInfo;
@@ -12,21 +14,7 @@ interface Props {
 
 const ExistingProfile = ({ userInfo }: Props) => {
   const { isEmployee } = useGetUserType();
-
-  let phoneNum = '';
-
-  const makePhoneNumForm = () => {
-    if (userInfo.phone) {
-      phoneNum = `${userInfo.phone.slice(0, 3)}-${userInfo.phone.slice(
-        3,
-        7
-      )}-${userInfo.phone.slice(-4)}`;
-    }
-  };
-
-  makePhoneNumForm();
-
-  const goToEdit = () => {};
+  const infoData = isEmployee ? userInfo : userInfo.shop.item;
 
   return (
     <section className={css.existingProfile}>
@@ -36,22 +24,26 @@ const ExistingProfile = ({ userInfo }: Props) => {
           <div className={css.userInfo}>
             <div className={css.user}>
               <div className={css.subTitle}>{isEmployee ? '이름' : '식당'}</div>
-              <div className={css.userName}>{userInfo.name}</div>
+              <div className={css.userName}>{infoData.name}</div>
             </div>
             {isEmployee && (
               <div className={css.detailInfo}>
                 <Icon title="phone" />
-                <span className={css.number}>{phoneNum}</span>
+                <span className={css.number}>
+                  {changePhoneNumFormat(infoData.phone)}
+                </span>
               </div>
             )}
             <div className={css.detailInfo}>
               <Icon title="location" />
               <span className={css.location}>
                 {isEmployee && '선호지역: '}
-                {userInfo.address}
+                {isEmployee ? infoData.address : infoData.address1}
               </span>
             </div>
-            <div className={css.comment}>{userInfo.bio}</div>
+            <div className={css.comment}>
+              {isEmployee ? infoData.bio : infoData.description}
+            </div>
           </div>
           <button className={css.editBtn}>편집하기</button>
         </div>

@@ -2,11 +2,8 @@ import { useEffect, useState } from 'react';
 import { getAxios } from '@_lib/axios';
 
 import RegistUser from './components/RegistUser';
-import ExistingProfile from './components/employee/ExistingProfile/ExistingProfile.tsx';
 import MakeProfile from './components/MakeProfile';
-
-import ExistingStore from './components/employer/ExistingStore/ExistingStore.tsx';
-import MakeStore from './components/employer/MakeStore/MakeStore.tsx';
+import ExisitingProfile from './components/ExisitingProfile';
 
 import { UserInfo } from '@_types/userType';
 import css from './User.module.scss';
@@ -26,21 +23,22 @@ const User = () => {
     );
   }, [isOpenMakeProfile]);
 
+  const isNewUser =
+    (userInfo.type === 'employee' && !userInfo.name) ||
+    (userInfo.type === 'employer' && !userInfo.shop);
+
   if (!userInfo) return null;
 
   return (
     <section className={css.container}>
-      {!userInfo.name && !isOpenMakeProfile && (
+      {isNewUser && !isOpenMakeProfile && (
         <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
       )}
       {isOpenMakeProfile && (
-        <MakeProfile
-          setIsOpenMakeProfile={setIsOpenMakeProfile}
-          userInfo={userInfo}
-          setHaveProfile={setHaveProfile}
-        />
+        <MakeProfile setIsOpenMakeProfile={setIsOpenMakeProfile} />
       )}
-      {userInfo.name && <ExistingProfile userInfo={userInfo} />}
+      {userInfo.name ||
+        (userInfo.shop && <ExisitingProfile userInfo={userInfo} />)}
     </section>
   );
 };

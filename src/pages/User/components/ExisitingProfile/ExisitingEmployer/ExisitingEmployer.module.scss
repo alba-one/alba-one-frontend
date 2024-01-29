@@ -1,0 +1,79 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.container {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  gap: 24px;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: inherit;
+}
+
+.storeImage {
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 300px;
+}
+
+.infoWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.category {
+  @include h4;
+  color: $red_40;
+}
+
+.title {
+  @include h1;
+}
+
+.locationBox {
+  @include body2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $gray_50;
+}
+
+.comment {
+  @include body2;
+}
+
+.buttonBox {
+  display: flex;
+  gap: 8px;
+}
+
+.buttonLayout {
+  @include h4;
+  padding: 14px 0;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit {
+  border: 1px solid $red_40;
+  background-color: $white;
+  color: $red_40;
+}
+
+.regist {
+  border: none;
+  background-color: $red_40;
+  color: $white;
+}
