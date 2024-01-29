@@ -9,6 +9,7 @@ import MakeEmployer from './MakeEmployer';
 import { ModalType } from '@_types/ModalType';
 
 import css from './MakeProfile.module.scss';
+
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
   // setHaveProfile: (value: boolean) => void;

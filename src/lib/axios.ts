@@ -1,34 +1,41 @@
-import axios from 'axios';
+import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
-const axiosInstance = axios.create({
+import {
+  errorInterceptor,
+  requestInterceptor,
+  successInterceptor,
+} from './interceptors';
+
+const axiosRequestConfig: AxiosRequestConfig = {
   baseURL: import.meta.env.VITE_BASE_URL,
-});
+  responseType: 'json',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+    'Access-Control-Allow-Origin': '*',
+  },
+};
 
-axiosInstance.defaults.headers.common['Content-Type'] =
-  'application/json;charset=utf-8';
+const api: AxiosInstance = axios.create(axiosRequestConfig);
 
-const token = localStorage.getItem('token');
-
-if (token) {
-  axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
+api.interceptors.request.use(requestInterceptor);
+api.interceptors.response.use(successInterceptor, errorInterceptor);
 
 export const getAxios = async (url: string) => {
-  const res = await axiosInstance.get(url);
+  const res = await api.get(url);
   return res;
 };
 
 export const postAxios = async (url: string, option: any) => {
-  const res = await axiosInstance.post(url, option);
+  const res = await api.post(url, option);
   return res;
 };
 
 export const putAxios = async (url: string, option: any) => {
-  const res = await axiosInstance.put(url, option);
+  const res = await api.put(url, option);
   return res;
 };
 
 export const deleteAxios = async (url: string) => {
-  const res = await axiosInstance.delete(url);
+  const res = await api.delete(url);
   return res;
 };

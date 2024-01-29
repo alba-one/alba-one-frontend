@@ -19,6 +19,7 @@ export default defineConfig({
       { find: '@_lib', replacement: resolve(__dirname, 'src/lib') },
       { find: '@_hooks', replacement: resolve(__dirname, 'src/hooks') },
       { find: '@_types', replacement: resolve(__dirname, 'src/types') },
+      { find: '@_utils', replacement: resolve(__dirname, 'src/utils') },
     ],
   },
   plugins: [react()],

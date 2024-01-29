@@ -1,0 +1,28 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.newApplyBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  padding: 60px 24px;
+  border: 1px solid $gray_20;
+  border-radius: 12px;
+}
+
+.notice {
+  @include body2;
+}
+
+.applyBtn {
+  @include h4;
+  padding: 14px 0;
+  width: 350px;
+  border: none;
+  border-radius: 6px;
+  background-color: $red_40;
+  color: $white;
+  cursor: pointer;
+}
