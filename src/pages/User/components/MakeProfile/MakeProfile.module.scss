@@ -2,7 +2,10 @@
 @import '@_styles/typos';
 
 .container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: $gray_5;
   height: 85vh;
   z-index: 2;

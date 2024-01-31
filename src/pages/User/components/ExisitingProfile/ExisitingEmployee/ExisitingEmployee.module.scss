@@ -1,2 +1,67 @@
 @import '@_styles/colors';
 @import '@_styles/typos';
+
+.container {
+  padding: 32px;
+  border-radius: 12px;
+  background-color: inherit;
+}
+
+.infoWrap {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  height: 300px;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.category {
+  @include h4;
+  color: $red_40;
+}
+
+.title {
+  @include h1;
+  margin-bottom: 20px;
+}
+
+.locationBox {
+  @include body2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $gray_50;
+}
+
+.comment {
+  @include body2;
+  margin-top: 20px;
+}
+
+.buttonBox {
+  display: flex;
+  gap: 8px;
+}
+
+.buttonLayout {
+  @include h4;
+  padding: 14px 0;
+  width: 100%;
+  height: fit-content;
+  border-radius: 6px;
+  border: 1px solid $red_40;
+  background-color: $white;
+  color: $red_40;
+  cursor: pointer;
+}
+
+.regist {
+  border: none;
+  background-color: $red_40;
+  color: $white;
+}

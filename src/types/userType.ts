@@ -19,3 +19,14 @@ export interface EmployerType {
   description: string;
   originalHourlyPay: string;
 }
+
+export interface EmployeeType {
+  address: string;
+  bio: string;
+  email: string;
+  id: string;
+  name: string;
+  phone: string;
+  shop: null | any;
+  type: string;
+}

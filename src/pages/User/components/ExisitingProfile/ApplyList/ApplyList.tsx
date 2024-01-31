@@ -1,7 +1,8 @@
-import { useGetUserType } from '@_hooks/useGetUserType';
-import css from './ApplyList.module.scss';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useGetUserType } from '@_hooks/useGetUserType';
 import { getAxios } from '@_lib/axios';
+import css from './ApplyList.module.scss';
 
 interface Props {
   userId: string;
@@ -10,12 +11,14 @@ interface Props {
 
 const ApplyList = ({ userId, handleNotice }: Props) => {
   const [noticeList, setNoticeList] = useState<any>([]);
+  const navigate = useNavigate();
   const { isEmployee } = useGetUserType();
-  const checkNoticeUrl = isEmployee
-    ? `/users/${userId}/applications`
-    : `/shops/${userId}/notices`;
 
   useEffect(() => {
+    const checkNoticeUrl = isEmployee
+      ? `/users/${userId}/applications`
+      : `/shops/${userId}/notices`;
+
     getAxios(checkNoticeUrl).then(res => {
       setNoticeList(res.data.items);
     });
@@ -28,7 +31,10 @@ const ApplyList = ({ userId, handleNotice }: Props) => {
           <span className={css.notice}>
             {isEmployee ? '아직 신청 내역이 없어요' : '공고를 등록해보세요'}
           </span>
-          <button className={css.applyBtn} onClick={handleNotice}>
+          <button
+            className={css.applyBtn}
+            onClick={isEmployee ? () => navigate('/') : handleNotice}
+          >
             {isEmployee ? '공고 보러가기' : '공고 등록하기'}
           </button>
         </div>

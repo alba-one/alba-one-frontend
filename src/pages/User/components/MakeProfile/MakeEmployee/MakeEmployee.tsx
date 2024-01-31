@@ -6,17 +6,19 @@ import InputBox from '@_components/InputBox';
 
 import { ModalType } from '@_types/ModalType';
 import css from './MakeEmployee.module.scss';
+import { UserInfo } from '@_types/userType';
 
 interface Props {
   handleModal: ({ type, desc, status }: ModalType) => void;
+  userInfo: UserInfo;
 }
 
-const MakeEmployee = ({ handleModal }: Props) => {
+const MakeEmployee = ({ handleModal, userInfo }: Props) => {
   const [userInput, setUserInput] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    bio: '',
+    name: userInfo.name || '',
+    phone: userInfo.phone || '',
+    address: userInfo.address || '',
+    bio: userInfo.bio || '',
   });
 
   const { name, phone, address, bio } = userInput;
