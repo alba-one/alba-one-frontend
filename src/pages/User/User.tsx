@@ -35,10 +35,14 @@ const User = () => {
         <RegistUser setIsOpenMakeProfile={setIsOpenMakeProfile} />
       )}
       {isOpenMakeProfile && (
-        <MakeProfile setIsOpenMakeProfile={setIsOpenMakeProfile} />
+        <MakeProfile
+          setIsOpenMakeProfile={setIsOpenMakeProfile}
+          userInfo={userInfo}
+        />
       )}
-      {userInfo.name ||
-        (userInfo.shop && <ExisitingProfile userInfo={userInfo} />)}
+      {(userInfo.name || userInfo.shop) && (
+        <ExisitingProfile userInfo={userInfo} />
+      )}
     </section>
   );
 };

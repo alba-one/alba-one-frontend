@@ -9,9 +9,11 @@ import Modal from '@_components/Modal';
 
 import { ModalType } from '@_types/ModalType';
 import css from './ExisitingProfile.module.scss';
+import MakeProfile from '../MakeProfile';
 
 const ExisitingProfile = ({ userInfo }: any) => {
-  const [isOpenMakeProfile, setIsOpenMakeProfile] = useState(false);
+  const [isOpenRegistNotice, setIsOpenRegistNotice] = useState(false);
+  const [isOpenModifyUserInfo, setIsOpenModifyUserInfo] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<ModalType>({
     type: '',
@@ -23,11 +25,11 @@ const ExisitingProfile = ({ userInfo }: any) => {
   const userData = userInfo.name ? userInfo : userInfo.shop.item;
 
   const handleNotice = () => {
-    setIsOpenMakeProfile(prev => !prev);
+    setIsOpenRegistNotice(prev => !prev);
   };
 
   const confirmModal = () => {
-    setIsOpenMakeProfile(prev => !prev);
+    setIsOpenRegistNotice(prev => !prev);
     setIsModalOpen(prev => !prev);
   };
 
@@ -37,7 +39,10 @@ const ExisitingProfile = ({ userInfo }: any) => {
         <h2 className={css.title}>{isEmployee ? '내 프로필' : '내 가게'}</h2>
         <div className={css.cardBox}>
           {isEmployee ? (
-            <ExisitingEmployee />
+            <ExisitingEmployee
+              userData={userData}
+              setIsOpenMakeProfile={setIsOpenModifyUserInfo}
+            />
           ) : (
             <ExisitingEmployer
               userData={userData}
@@ -54,12 +59,18 @@ const ExisitingProfile = ({ userInfo }: any) => {
           <ApplyList userId={userData.id} handleNotice={handleNotice} />
         </div>
       </article>
-      {isOpenMakeProfile && (
+      {isOpenRegistNotice && (
         <RegistNotice
           userId={userData.id}
           handleNotice={handleNotice}
           handleModal={setModalInfo}
           setIsModalOpen={setIsModalOpen}
+        />
+      )}
+      {isOpenModifyUserInfo && (
+        <MakeProfile
+          setIsOpenMakeProfile={setIsOpenModifyUserInfo}
+          userInfo={userData}
         />
       )}
       {isModalOpen && (

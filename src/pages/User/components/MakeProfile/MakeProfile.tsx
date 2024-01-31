@@ -9,14 +9,15 @@ import MakeEmployer from './MakeEmployer';
 import { ModalType } from '@_types/ModalType';
 
 import css from './MakeProfile.module.scss';
+import { UserInfo } from '@_types/userType';
 
 interface Props {
   setIsOpenMakeProfile: React.Dispatch<React.SetStateAction<boolean>>;
   // setHaveProfile: (value: boolean) => void;
-  // userInfo: UserInfo;
+  userInfo: UserInfo;
 }
 
-const MakeProfile = ({ setIsOpenMakeProfile }: Props) => {
+const MakeProfile = ({ setIsOpenMakeProfile, userInfo }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<ModalType>({
     type: '',
@@ -51,7 +52,7 @@ const MakeProfile = ({ setIsOpenMakeProfile }: Props) => {
           />
         </div>
         {isEmployee ? (
-          <MakeEmployee handleModal={handleModal} />
+          <MakeEmployee handleModal={handleModal} userInfo={userInfo} />
         ) : (
           <MakeEmployer handleModal={handleModal} />
         )}
