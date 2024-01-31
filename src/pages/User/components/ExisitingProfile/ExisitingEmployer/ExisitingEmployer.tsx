@@ -3,7 +3,12 @@ import { EmployerType } from '@_types/userType';
 
 import css from './ExisitingEmployer.module.scss';
 
-const ExisitingEmployer = ({ userData }: EmployerType) => {
+interface Props {
+  userData: EmployerType;
+  handleNotice: () => void;
+}
+
+const ExisitingEmployer = ({ userData, handleNotice }: Props) => {
   const { imageUrl, name, address1, description } = userData;
 
   return (
@@ -23,7 +28,10 @@ const ExisitingEmployer = ({ userData }: EmployerType) => {
           <button className={`${css.buttonLayout} ${css.edit}`}>
             편집하기
           </button>
-          <button className={`${css.buttonLayout} ${css.regist}`}>
+          <button
+            className={`${css.buttonLayout} ${css.regist}`}
+            onClick={handleNotice}
+          >
             공고 등록하기
           </button>
         </div>

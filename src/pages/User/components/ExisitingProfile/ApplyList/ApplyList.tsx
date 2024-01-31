@@ -5,9 +5,10 @@ import { getAxios } from '@_lib/axios';
 
 interface Props {
   userId: string;
+  handleNotice: () => void;
 }
 
-const ApplyList = ({ userId }: Props) => {
+const ApplyList = ({ userId, handleNotice }: Props) => {
   const [noticeList, setNoticeList] = useState<any>([]);
   const { isEmployee } = useGetUserType();
   const checkNoticeUrl = isEmployee
@@ -27,7 +28,7 @@ const ApplyList = ({ userId }: Props) => {
           <span className={css.notice}>
             {isEmployee ? '아직 신청 내역이 없어요' : '공고를 등록해보세요'}
           </span>
-          <button className={css.applyBtn}>
+          <button className={css.applyBtn} onClick={handleNotice}>
             {isEmployee ? '공고 보러가기' : '공고 등록하기'}
           </button>
         </div>

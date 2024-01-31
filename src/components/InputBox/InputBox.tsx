@@ -68,7 +68,21 @@ const InputBox = ({
             required={required}
             onChange={handleInput}
           />
-          <span>원</span>
+          <span className={css.payUnit}>원</span>
+        </div>
+      )}
+      {type === 'time' && (
+        <div className={css.payBox}>
+          <input
+            className={css.payInput}
+            type="number"
+            name={name}
+            value={value}
+            placeholder={placeholder}
+            required={required}
+            onChange={handleInput}
+          />
+          <span className={css.payUnit}>시간</span>
         </div>
       )}
       {type === 'image' && (
