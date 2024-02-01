@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { getAxios } from '@_lib/axios';
 
 import Card from '../../components/Card';
-import DetailedFilter from './components/DetailedFilter/DetailedFilter';
-
-import { NotiType } from 'src/types/cardType';
+import DetailedFilter from './components/DetailedFilter';
 
 import css from './List.module.scss';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { getAxios } from '@_lib/axios';
 
 const List = () => {
   const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [announcements, setAnnouncements] = useState<[]>();
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
@@ -51,7 +48,12 @@ const List = () => {
               onClick={handleFilterBtn}
             >
               상세 필터
-              {isFiltered && <DetailedFilter setIsFiltered={setIsFiltered} />}
+              {isFiltered && (
+                <DetailedFilter
+                  location={location.search}
+                  setIsFiltered={setIsFiltered}
+                />
+              )}
             </div>
           </div>
         </div>

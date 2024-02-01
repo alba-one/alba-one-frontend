@@ -2,14 +2,15 @@ import Icon from '@_components/Icon';
 import { addressList } from '@_constants/dropdownList';
 
 import css from './DetailedFilter.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 interface Props {
   setIsFiltered: React.Dispatch<React.SetStateAction<boolean>>;
+  location: string;
 }
 
-const DetailedFilter = ({ setIsFiltered }: Props) => {
+const DetailedFilter = ({ setIsFiltered, location }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -17,6 +18,8 @@ const DetailedFilter = ({ setIsFiltered }: Props) => {
     startsAtGte: string | undefined;
     hourlyPayGte: string | undefined;
   }>({ startsAtGte: undefined, hourlyPayGte: undefined });
+
+  console.log(selectedOptions);
 
   const closeFilter = () => {
     setIsFiltered(prev => !prev);
@@ -89,6 +92,41 @@ const DetailedFilter = ({ setIsFiltered }: Props) => {
     setSearchParams(searchParams);
   };
 
+  const locationAddress = searchParams.get('address');
+  const locationStartsAt = searchParams.get('startsAtGte');
+  const locationHourlyPay = searchParams.get('hourlyPayGte');
+
+  const handleFilterValue = () => {
+    if (location.includes('address')) {
+      const addressValue = locationAddress?.split(',');
+
+      setSelectedOptions(addressValue);
+    }
+
+    if (location.includes('startsAtGte')) {
+      const year = locationStartsAt?.substring(0, 4);
+      const month = locationStartsAt?.substring(5, 7);
+      const date = locationStartsAt?.substring(8, 10);
+
+      const startsAtValue = `${year}${month}${date}`;
+
+      setUserInput(prev => ({
+        ...prev,
+        startsAtGte: startsAtValue,
+      }));
+    }
+    if (location.includes('hourlyPayGte')) {
+      setUserInput(prev => ({
+        ...prev,
+        hourlyPayGte: locationHourlyPay + '',
+      }));
+    }
+  };
+
+  useEffect(() => {
+    handleFilterValue();
+  }, []);
+
   return (
     <section className={css.container} onClick={e => e.stopPropagation()}>
       <div className={css.title}>
@@ -141,7 +179,8 @@ const DetailedFilter = ({ setIsFiltered }: Props) => {
             className={css.dateInput}
             placeholder="연월일 순서로 8자리의 숫자를 입력"
             type="number"
-            onBlur={e => {
+            defaultValue={locationStartsAt ? userInput.startsAtGte : undefined}
+            onBlurCapture={e => {
               const { value } = e.target;
               formatDate(value);
             }}
@@ -156,6 +195,9 @@ const DetailedFilter = ({ setIsFiltered }: Props) => {
             className={css.wageInput}
             placeholder="입력"
             type="number"
+            defaultValue={
+              locationHourlyPay ? userInput.hourlyPayGte : undefined
+            }
             onBlur={e => {
               const { value } = e.target;
               setUserInput(prev => ({
