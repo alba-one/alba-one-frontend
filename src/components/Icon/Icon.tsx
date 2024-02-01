@@ -16,6 +16,7 @@ import chevronRight from '@_assets/icons/i_chevron_right.svg';
 import caution from '@_assets/icons/i_caution.svg';
 import select from '@_assets/icons/i_select.svg';
 import camera from '@_assets/icons/i_camera.svg';
+import redClose from '@_assets/icons/i_redClose.svg';
 
 interface Props {
   title: string;
@@ -45,6 +46,7 @@ const iconList: IconList = {
   caution,
   select,
   camera,
+  redClose,
 };
 
 const Icon = ({ title, handleIcon }: Props) => {
