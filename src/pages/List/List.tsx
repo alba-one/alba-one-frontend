@@ -1,16 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Card from '../../components/Card';
 import DetailedFilter from './components/DetailedFilter/DetailedFilter';
 
+import { NotiType } from 'src/types/cardType';
+
 import css from './List.module.scss';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { getAxios } from '@_lib/axios';
 
 const List = () => {
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [announcements, setAnnouncements] = useState<[]>();
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
+
+  useEffect(() => {
+    const url = '/notices';
+    getAxios(`${url}${location.search}`).then(res =>
+      setAnnouncements(res.data.items)
+    );
+  }, [location.search]);
 
   const handleFilterBtn = () => {
     setIsFiltered(prev => !prev);
   };
+
+  if (!announcements) return;
 
   return (
     <article className={css.container}>
@@ -18,9 +35,9 @@ const List = () => {
         <div className={css.listBox}>
           <h2 className={css.listTitle}>맞춤 공고</h2>
           <div className={css.cardWrap}>
-            <Card />
-            <Card />
-            <Card />
+            {announcements?.map((el, idx: number) => {
+              return <Card key={idx} announcement={el} />;
+            })}
           </div>
         </div>
       </section>
@@ -39,12 +56,9 @@ const List = () => {
           </div>
         </div>
         <div className={css.cardWrap}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {announcements?.map((el, idx: number) => {
+            return <Card key={idx} announcement={el} />;
+          })}
         </div>
         <div className={css.paginationBox}>pagination</div>
       </section>

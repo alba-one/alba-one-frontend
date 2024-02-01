@@ -5,16 +5,18 @@ export interface NotiType {
   workhour: number;
   description: string;
   closed: boolean;
-  item: ShopType[];
+  shop: ShopType;
 }
 
 export interface ShopType {
-  id: string;
-  name: string;
-  category: string;
-  address1: string;
-  address2: string;
-  description: string;
-  imageUrl: string;
-  originalHourlyPay: number;
+  item: {
+    id: string;
+    name: string;
+    category: string;
+    address1: string;
+    address2: string;
+    description: string;
+    imageUrl: string;
+    originalHourlyPay: number;
+  };
 }

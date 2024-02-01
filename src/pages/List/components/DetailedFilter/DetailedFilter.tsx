@@ -172,7 +172,13 @@ const DetailedFilter = ({ setIsFiltered }: Props) => {
         <button className={css.resetBtn} onClick={removeAllCondition}>
           초기화
         </button>
-        <button className={css.applyBtn} onClick={getRightAnnouncement}>
+        <button
+          className={css.applyBtn}
+          onClick={() => {
+            getRightAnnouncement();
+            closeFilter();
+          }}
+        >
           적용하기
         </button>
       </div>
