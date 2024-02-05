@@ -101,13 +101,14 @@
 }
 
 .applyBtn {
+  @include h4;
   height: 50px;
   border-radius: 6px;
   border: none;
 
   background-color: $red_40;
-  @include h4;
   color: $white;
+  cursor: pointer;
 }
 
 .storeBtnBox {
