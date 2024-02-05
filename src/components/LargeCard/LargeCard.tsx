@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import Icon from '@_components/Icon';
 import { NoticeDetail, ShopInfo } from '@_types/noticeTypes';
+import { getAxios, postAxios, putAxios } from '@_lib/axios';
 import css from './LargeCard.module.scss';
 
 interface Props {
@@ -10,7 +12,43 @@ interface Props {
 }
 
 const LaregeCard = ({ isEmployee, notice, shop }: Props) => {
-  const { hourlyPay, startsAt, workhour } = notice;
+  const [applicationList, setApplicationList] = useState({});
+  const [refetch, setRefetch] = useState(false);
+
+  const { hourlyPay, startsAt, workhour, id } = notice;
+
+  useEffect(() => {
+    getAxios(`/users/${localStorage.getItem('userId')}/applications`).then(
+      res => setApplicationList(res.data)
+    );
+  }, [refetch]);
+
+  const handleApplication = () => {
+    getAxios(`/users/${localStorage.getItem('userId')}`).then(res => {
+      if (res.data.item.name) {
+        postAxios(`/shops/${shop.id}/notices/${id}/applications`, {}).then(
+          res => setRefetch(prev => !prev)
+        );
+      } else {
+        alert('프로필을 먼저 등록해주세요');
+      }
+    });
+  };
+
+  if (!applicationList?.items) return null;
+
+  const userApplicationIds = applicationList?.items.filter(
+    el => el.item.notice.item.id === id && el.item.status !== 'canceled'
+  );
+
+  const handleCancleApply = () => {
+    putAxios(
+      `/shops/${shop.id}/notices/${id}/applications/${userApplicationIds[0].item.id}`,
+      {
+        status: 'canceled',
+      }
+    ).then(res => setRefetch(prev => !prev));
+  };
 
   return (
     <div className={`${css.storeCard} ${isEmployee ? '' : css.redCard}`}>
@@ -52,7 +90,15 @@ const LaregeCard = ({ isEmployee, notice, shop }: Props) => {
         </div>
         <div className={css.greeting}>{shop.description}</div>
         {isEmployee ? (
-          <button className={css.applyBtn}>신청하기</button>
+          userApplicationIds.length !== 0 ? (
+            <button className={css.applyBtn} onClick={handleCancleApply}>
+              취소하기
+            </button>
+          ) : (
+            <button className={css.applyBtn} onClick={handleApplication}>
+              신청하기
+            </button>
+          )
         ) : (
           <div className={css.storeBtnBox}>
             <button className={css.editBtn}>편집하기</button>
