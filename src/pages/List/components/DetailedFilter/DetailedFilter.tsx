@@ -26,7 +26,7 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
   };
 
   const handleSelectedOptions = (el: string) => {
-    if (!selectedOptions.includes(el)) {
+    if (!selectedOptions.includes(el) && selectedOptions.length < 4) {
       setSelectedOptions(prev => [...prev, el]);
     }
   };
@@ -52,13 +52,17 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
   };
 
   const getRightAnnouncement = () => {
-    const addressString = selectedOptions.join(',');
+    const addressString = selectedOptions;
 
     if (addressString) {
-      if (searchParams.has('address')) {
-        searchParams.delete('address');
+      for (let i = 0; i < selectedOptions.length; i++) {
+        if (searchParams.has('address')) {
+          searchParams.delete('address');
+        }
       }
-      searchParams.append('address', addressString);
+      for (let i = 0; i < selectedOptions.length; i++) {
+        searchParams.append('address', addressString[i]);
+      }
     }
     if (!addressString) {
       searchParams.delete('address');
@@ -92,15 +96,14 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
     setSearchParams(searchParams);
   };
 
-  const locationAddress = searchParams.get('address');
+  const locationAddress = searchParams.getAll('address');
   const locationStartsAt = searchParams.get('startsAtGte');
   const locationHourlyPay = searchParams.get('hourlyPayGte');
 
+  console.log(locationAddress);
   const handleFilterValue = () => {
     if (location.includes('address')) {
-      const addressValue = locationAddress?.split(',');
-
-      setSelectedOptions(addressValue);
+      setSelectedOptions(locationAddress);
     }
 
     if (location.includes('startsAtGte')) {
