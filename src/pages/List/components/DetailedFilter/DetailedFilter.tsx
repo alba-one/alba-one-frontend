@@ -33,7 +33,6 @@ const DetailedFilter = ({ isFiltered, setIsFiltered, location }: Props) => {
     setIsFiltered(prev => !prev);
   };
 
-  console.log('userinput: ', userInput);
   const handleSelectedOptions = (el: string) => {
     if (!selectedOptions.includes(el) && selectedOptions.length < 4) {
       setSelectedOptions(prev => [...prev, el]);
@@ -135,8 +134,6 @@ const DetailedFilter = ({ isFiltered, setIsFiltered, location }: Props) => {
   const locationAddress = searchParams.getAll('address');
   const locationStartsAt = searchParams.get('startsAtGte');
   const locationHourlyPay = searchParams.get('hourlyPayGte');
-
-  console.log('locationStartsAt: ', locationStartsAt);
 
   const handleFilterValue = () => {
     if (location.includes('address')) {
