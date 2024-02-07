@@ -6,25 +6,34 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 interface Props {
+  isFiltered: boolean;
   setIsFiltered: React.Dispatch<React.SetStateAction<boolean>>;
   location: string;
 }
 
-const DetailedFilter = ({ setIsFiltered, location }: Props) => {
+const DetailedFilter = ({ isFiltered, setIsFiltered, location }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [dateValue, setDateValue] = useState<string>('');
+  const [userDate, setUserDate] = useState<string>('');
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
   const [userInput, setUserInput] = useState<{
     startsAtGte: string | undefined;
     hourlyPayGte: string | undefined;
   }>({ startsAtGte: undefined, hourlyPayGte: undefined });
 
+<<<<<<< HEAD
   console.log(selectedOptions);
 
+=======
+  const [defaultDate, setDefaultDate] = useState<string>('');
+>>>>>>> 1273c76 (🍳 FIX: startsAt 반영 에러 수정)
   const closeFilter = () => {
     setIsFiltered(prev => !prev);
   };
 
+  console.log('userinput: ', userInput);
   const handleSelectedOptions = (el: string) => {
     if (!selectedOptions.includes(el) && selectedOptions.length < 4) {
       setSelectedOptions(prev => [...prev, el]);
@@ -35,20 +44,47 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
     setSelectedOptions(prev => prev.filter(item => item !== el));
   };
 
-  const formatDate = (e: string) => {
-    if (e.length < 8) {
-      setUserInput(prev => ({ ...prev, startsAtGte: undefined }));
-    } else {
-      const year = e.substring(0, 4);
-      const month = e.substring(4, 6);
-      const date = e.substring(6, 8);
+  let formatted = '';
+  const formatForNewDate = (dateString: string) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const date = dateString.substring(6, 8);
 
-      const time = 'T00:00:00Z';
+    formatted = `${year}-${month}-${date}`;
+  };
 
-      const userDate = `${year}-${month}-${date}${time}`;
+  const formattedDate = async (d: string) => {
+    try {
+      formatForNewDate(d);
+      const date = new Date(formatted);
 
-      setUserInput(prev => ({ ...prev, startsAtGte: userDate }));
+      const saveDate = date.toISOString();
+
+      setUserDate(saveDate);
+    } catch (error) {
+      console.error('error: ', error);
     }
+  };
+
+  useEffect(() => {
+    formatDate();
+  }, [userDate]);
+
+  const formatDate = () => {
+    if (dateValue) {
+      formattedDate(dateValue);
+
+      setUserInput(prev => ({
+        ...prev,
+        startsAtGte: userDate,
+      }));
+    }
+    if (!dateValue && userInput.startsAtGte) {
+      setUserInput(prev => ({
+        ...prev,
+        startsAtGte: userInput.startsAtGte,
+      }));
+    } else return;
   };
 
   const getRightAnnouncement = () => {
@@ -100,7 +136,8 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
   const locationStartsAt = searchParams.get('startsAtGte');
   const locationHourlyPay = searchParams.get('hourlyPayGte');
 
-  console.log(locationAddress);
+  console.log('locationStartsAt: ', locationStartsAt);
+
   const handleFilterValue = () => {
     if (location.includes('address')) {
       setSelectedOptions(locationAddress);
@@ -113,9 +150,10 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
 
       const startsAtValue = `${year}${month}${date}`;
 
+      setDefaultDate(startsAtValue);
       setUserInput(prev => ({
         ...prev,
-        startsAtGte: startsAtValue,
+        startsAtGte: locationStartsAt,
       }));
     }
     if (location.includes('hourlyPayGte')) {
@@ -128,7 +166,11 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
 
   useEffect(() => {
     handleFilterValue();
-  }, []);
+  }, [isFiltered]);
+
+  useEffect(() => {
+    formatDate();
+  }, [dateValue]);
 
   return (
     <section className={css.container} onClick={e => e.stopPropagation()}>
@@ -182,10 +224,10 @@ const DetailedFilter = ({ setIsFiltered, location }: Props) => {
             className={css.dateInput}
             placeholder="연월일 순서로 8자리의 숫자를 입력"
             type="number"
-            defaultValue={locationStartsAt ? userInput.startsAtGte : undefined}
-            onBlurCapture={e => {
+            defaultValue={locationStartsAt ? defaultDate : undefined}
+            onBlur={e => {
               const { value } = e.target;
-              formatDate(value);
+              setDateValue(value);
             }}
           />
         </div>

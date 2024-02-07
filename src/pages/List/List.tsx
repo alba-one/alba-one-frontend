@@ -51,6 +51,7 @@ const List = () => {
               {isFiltered && (
                 <DetailedFilter
                   location={location.search}
+                  isFiltered={isFiltered}
                   setIsFiltered={setIsFiltered}
                 />
               )}
