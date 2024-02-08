@@ -148,7 +148,7 @@ const DetailedFilter = ({ isFiltered, setIsFiltered, location }: Props) => {
       setDefaultDate(startsAtValue);
       setUserInput(prev => ({
         ...prev,
-        startsAtGte: locationStartsAt,
+        startsAtGte: locationStartsAt || '',
       }));
     }
     if (location.includes('hourlyPayGte')) {
