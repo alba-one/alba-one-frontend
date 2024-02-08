@@ -14,6 +14,7 @@ import MakeProfile from '../MakeProfile';
 const ExisitingProfile = ({ userInfo }: any) => {
   const [isOpenRegistNotice, setIsOpenRegistNotice] = useState(false);
   const [isOpenModifyUserInfo, setIsOpenModifyUserInfo] = useState(false);
+  const [isOpenMakeProfile, setIsOpenMakeProfile] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<ModalType>({
     type: '',
@@ -30,7 +31,7 @@ const ExisitingProfile = ({ userInfo }: any) => {
 
   const confirmModal = () => {
     setIsOpenRegistNotice(prev => !prev);
-    setIsModalOpen(prev => !prev);
+    setIsOpenMakeProfile(prev => !prev);
   };
 
   return (

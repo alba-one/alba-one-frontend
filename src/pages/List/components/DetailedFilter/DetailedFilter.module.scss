@@ -1,0 +1,181 @@
+@import '@_styles/typos';
+@import '@_styles/colors';
+
+.container {
+  position: absolute;
+  top: 40px;
+  right: 0px;
+
+  width: 390px;
+  height: 840px;
+
+  margin-top: 10px;
+  padding: 20px;
+
+  border-radius: 10px;
+
+  background-color: $white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+  color: $black;
+}
+
+.title {
+  @include h3;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 15px;
+  margin-bottom: 26px;
+}
+
+.subTitle {
+  @include body2;
+
+  margin-bottom: 16px;
+}
+
+.locationOptions {
+  display: flex;
+  flex-wrap: wrap;
+
+  overflow: scroll;
+
+  width: 350px;
+  height: 234px;
+
+  padding: 30px;
+
+  border-radius: 6px;
+  border: 1px solid $gray_20;
+}
+
+.option {
+  @include body3;
+
+  width: 50%;
+  height: 18px;
+
+  margin-bottom: 14px;
+
+  color: $gray_50;
+
+  cursor: pointer;
+}
+
+.selectedBox {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 350px;
+  height: 88px;
+
+  overflow: scroll;
+
+  margin-top: 20px;
+}
+
+.selectedOption {
+  @include body3;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 30px;
+  padding: 0px 14px;
+  margin-right: 20px;
+  margin-bottom: 8px;
+
+  border-radius: 20px;
+
+  background-color: $red_10;
+  color: $red_40;
+}
+
+.closeBtn {
+  margin-left: 6px;
+}
+
+.divider {
+  width: 350px;
+  height: 1px;
+
+  margin-top: 24px;
+  margin-bottom: 28px;
+
+  background-color: $gray_20;
+}
+
+.dateInput {
+  @include body2;
+  width: 350px;
+  height: 58px;
+
+  padding: 10px;
+  padding-left: 20px;
+
+  border: 1px solid $gray_20;
+  border-radius: 6px;
+
+  &::placeholder {
+    color: $gray_40;
+  }
+}
+
+.wageInput {
+  @include body2;
+  width: 180px;
+  height: 58px;
+
+  padding: 10px;
+  padding-left: 20px;
+
+  border: 1px solid $gray_20;
+  border-radius: 6px;
+
+  &::placeholder {
+    color: $gray_40;
+  }
+}
+
+.wageComment {
+  @include body2;
+
+  margin-left: 20px;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.resetBtn {
+  @include body2;
+  width: 82px;
+  height: 48px;
+
+  border-radius: 6px;
+
+  background-color: $white;
+  border: 2px solid $red_40;
+  color: $red_40;
+
+  cursor: pointer;
+}
+
+.applyBtn {
+  @include body2;
+  width: 250px;
+  height: 48px;
+
+  border-radius: 6px;
+
+  background-color: $red_40;
+  border: none;
+  color: $white;
+
+  cursor: pointer;
+}
