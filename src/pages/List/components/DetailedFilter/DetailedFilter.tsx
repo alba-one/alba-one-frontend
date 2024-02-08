@@ -23,16 +23,12 @@ const DetailedFilter = ({ isFiltered, setIsFiltered, location }: Props) => {
     hourlyPayGte: string | undefined;
   }>({ startsAtGte: undefined, hourlyPayGte: undefined });
 
-<<<<<<< HEAD
-  console.log(selectedOptions);
-
-=======
   const [defaultDate, setDefaultDate] = useState<string>('');
->>>>>>> 1273c76 (🍳 FIX: startsAt 반영 에러 수정)
   const closeFilter = () => {
     setIsFiltered(prev => !prev);
   };
 
+  console.log('userinput: ', userInput);
   const handleSelectedOptions = (el: string) => {
     if (!selectedOptions.includes(el) && selectedOptions.length < 4) {
       setSelectedOptions(prev => [...prev, el]);
@@ -134,6 +130,8 @@ const DetailedFilter = ({ isFiltered, setIsFiltered, location }: Props) => {
   const locationAddress = searchParams.getAll('address');
   const locationStartsAt = searchParams.get('startsAtGte');
   const locationHourlyPay = searchParams.get('hourlyPayGte');
+
+  console.log('locationStartsAt: ', locationStartsAt);
 
   const handleFilterValue = () => {
     if (location.includes('address')) {
