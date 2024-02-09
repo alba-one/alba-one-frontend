@@ -14,6 +14,10 @@ export default defineConfig({
         find: '@_constants',
         replacement: resolve(__dirname, 'src/constants'),
       },
+      {
+        find: '@_contexts',
+        replacement: resolve(__dirname, 'src/contexts'),
+      },
       { find: '@_assets', replacement: resolve(__dirname, 'src/assets') },
       { find: '@_styles', replacement: resolve(__dirname, 'src/styles') },
       { find: '@_lib', replacement: resolve(__dirname, 'src/lib') },
