@@ -20,6 +20,35 @@
   padding: 0px 20px;
 }
 
+.buttonBox {
+  button {
+    padding: 8px 16px;
+    background-color: $white;
+    border-radius: 8px;
+  }
+}
+
+.negativeBtn {
+  margin-right: 15px;
+  border: 1px solid $red_30;
+  color: $red_30;
+
+  &:hover {
+    background-color: $red_10;
+    cursor: pointer;
+  }
+}
+
+.positiveBtn {
+  border: 1px solid $blue_20;
+  color: $blue_20;
+
+  &:hover {
+    background-color: $blue_10;
+    cursor: pointer;
+  }
+}
+
 .badge {
   height: 30px;
   padding: 6px 14px;
