@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import moment from 'moment';
 import Icon from '@_components/Icon';
 import { NoticeDetail, ShopInfo } from '@_types/noticeTypes';
@@ -9,9 +9,15 @@ interface Props {
   isEmployee: boolean;
   notice: NoticeDetail;
   shop: ShopInfo;
+  setIsOpenShopInfo: Dispatch<SetStateAction<boolean>>;
 }
 
-const LaregeCard = ({ isEmployee, notice, shop }: Props) => {
+const LaregeCard = ({
+  isEmployee,
+  notice,
+  shop,
+  setIsOpenShopInfo = () => {},
+}: Props) => {
   const [applicationList, setApplicationList] = useState({});
   const [refetch, setRefetch] = useState(false);
 
@@ -101,7 +107,14 @@ const LaregeCard = ({ isEmployee, notice, shop }: Props) => {
           )
         ) : (
           <div className={css.storeBtnBox}>
-            <button className={css.editBtn}>편집하기</button>
+            <button
+              className={css.editBtn}
+              onClick={() => {
+                setIsOpenShopInfo(prev => !prev);
+              }}
+            >
+              편집하기
+            </button>
             <button className={css.registerBtn}>공고 등록하기</button>
           </div>
         )}

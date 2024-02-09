@@ -11,7 +11,7 @@ interface Props {
   type: string;
   handleInput?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  ) => void | null;
   handleDropDown?: (type: string, value: string) => void;
 }
 

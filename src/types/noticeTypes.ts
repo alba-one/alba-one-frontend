@@ -7,10 +7,10 @@ export interface ShopInfo {
   address2: string;
   category: string;
   description: string;
-  id: string;
+  id?: string;
   imageUrl: string;
   name: string;
-  originalHourlyPay: string;
+  originalHourlyPay: number | string;
 }
 
 export interface NoticeDetail {

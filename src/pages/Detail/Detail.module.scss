@@ -3,7 +3,7 @@
 
 .container {
   @include body2;
-
+  position: relative;
   background-color: $gray_5;
   line-height: 1.5;
 }
@@ -48,4 +48,31 @@
 
   @include h4;
   color: $black;
+}
+
+.shopInfoBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $gray_5;
+  height: 100%;
+  z-index: 2;
+}
+
+.contentWrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 60px 0;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.titleBox {
+  @include h1;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  width: 100%;
 }

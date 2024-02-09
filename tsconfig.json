@@ -24,6 +24,7 @@
     "paths": {
       "@_components/*": ["src/components/*"],
       "@_constants/*": ["src/constants/*"],
+      "@_contexts/*": ["src/contexts/*"],
       "@_assets/*": ["src/assets/*"],
       "@_styles/*": ["src/styles/*"],
       "@_lib/*": ["src/lib/*"],
