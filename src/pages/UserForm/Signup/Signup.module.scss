@@ -1,0 +1,62 @@
+@import '@_styles/typos';
+@import '@_styles/colors';
+
+.inputBox {
+  margin-top: 10px;
+}
+
+.errorBox {
+  margin: 8px 0px;
+  height: 16px;
+}
+
+.errorMsg {
+  font-size: 12px;
+  color: $red_40;
+}
+
+.inputTitle {
+  @include body2;
+}
+
+.radioBtnWrap {
+  display: flex;
+  gap: 16px;
+  margin: 10px 0 30px;
+}
+
+.radioBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 40px;
+  width: 100%;
+  border: 1px solid $gray_30;
+  border-radius: 30px;
+}
+
+.activeBorder {
+  border: 1px solid $red_40;
+}
+
+.radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $gray_30;
+  border-radius: 100%;
+  background-color: $white;
+}
+
+.active {
+  background-color: $red_40;
+  background-image: url('../../../assets/icons/i_checked.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.radioInput {
+  display: none;
+}

@@ -1,4 +1,4 @@
-export interface UserType {
+export interface UserInfoType {
   [key: string]: string;
   email: string;
   password: string;
@@ -7,7 +7,6 @@ export interface UserType {
 }
 
 export interface UserInputType {
-  id: number;
   title: string;
   type: string;
   name: string;

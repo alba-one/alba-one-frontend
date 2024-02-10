@@ -1,0 +1,19 @@
+@import '@_styles/typos';
+@import '@_styles/colors';
+
+.cta {
+  padding: 14px 0;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background-color: $red_40;
+  color: $white;
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: $red_10;
+  cursor: default;
+  transition: 0.5s all ease-in-out;
+}
