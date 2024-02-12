@@ -1,6 +1,8 @@
 import Icon from '@_components/Icon';
 import { NotiType } from 'src/types/cardType';
 
+import { useNavigate } from 'react-router-dom';
+
 import css from './Card.module.scss';
 
 interface Props {
@@ -10,9 +12,12 @@ interface Props {
 }
 
 const Card = ({ announcement }: Props) => {
+  const navigate = useNavigate();
+
   const { hourlyPay, workhour, startsAt } = announcement.item;
-  const { name, address1, imageUrl, originalHourlyPay } =
+  const { id, name, address1, imageUrl, originalHourlyPay } =
     announcement.item.shop.item;
+  const noticeId = announcement.item.id;
 
   const hourlyPayForm = () => {
     return hourlyPay.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
@@ -31,8 +36,15 @@ const Card = ({ announcement }: Props) => {
     return Math.floor(percent);
   };
 
+  const goToDetail = () => {
+    const url = `/shops/${id}/notices/${noticeId}`;
+
+    navigate(url);
+    window.location.href = window.location.href;
+  };
+
   return (
-    <div className={css.card}>
+    <div className={css.card} onClick={goToDetail}>
       <div className={css.cardImageBox}>
         <img className={css.cardImage} src={imageUrl} alt={`${name} image`} />
       </div>

@@ -12,7 +12,7 @@ const Router = () => {
       <Nav />
       <Routes>
         <Route index element={<List />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/shops/:shop_id/notices/:notice_id" element={<Detail />} />
         <Route path="/signin" element={<UserForm />} />
         <Route path="/signup" element={<UserForm />} />
         <Route path="/user" element={<User />} />

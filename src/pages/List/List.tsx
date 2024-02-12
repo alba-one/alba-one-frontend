@@ -18,8 +18,6 @@ const List = () => {
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
 
-  // const [isSelected, setIsSelected] = useState<boolean>(false);
-
   useEffect(() => {
     const url = '/notices';
     getAxios(`${url}?offset=${offset}&limit=${limit}${location.search}`).then(
@@ -30,13 +28,6 @@ const List = () => {
   const handleFilterBtn = () => {
     setIsFiltered(prev => !prev);
   };
-
-  // ** page num array
-
-  // ** announcement for each page
-  // 1. offset = idx of 'the start'  / former last idx + 1
-  // 2. limit = idx of 'the last'
-  // 3. next page's offset = 'the last' idx + 1
 
   if (!announcements) return;
 
