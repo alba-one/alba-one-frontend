@@ -43,12 +43,12 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    getAxios(
-      `/shops/c9412e6d-a49d-4e19-9144-5f0dc958db9f/notices/${params.id}`
-    ).then(({ data }) => {
-      setNoticeDetail(data.item);
-      setShopInfo(data.item.shop.item);
-    });
+    getAxios(`/shops/${params.shop_id}/notices/${params.notice_id}`).then(
+      ({ data }) => {
+        setNoticeDetail(data.item);
+        setShopInfo(data.item.shop.item);
+      }
+    );
   }, []);
 
   const putUserInput = (
