@@ -1,0 +1,43 @@
+@import '@_styles/colors';
+@import '@_styles/typos';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  margin-top: 64px;
+}
+
+.chevron {
+  cursor: pointer;
+}
+
+.number {
+  @include body3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.selected {
+  @include body3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+
+  cursor: pointer;
+  background-color: $red_30;
+  color: $white;
+}
