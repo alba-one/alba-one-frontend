@@ -61,13 +61,16 @@ const Pagination = ({
   //o  3. default offset = 1 : useState(1) == currentPage
 
   const totalPage = Math.ceil(totalCount / limitNum);
-  const pageBoxes = Math.ceil(totalPage / pagesPerBox);
+
   const pageNumbers: number[] = [];
 
   const renderingPagination = () => {
     if (totalCount <= limitNum) return;
 
     for (let i = 1; i <= totalPage; i++) {
+      if (pageNumbers.length >= pagesPerBox) {
+        pageNumbers.shift();
+      }
       pageNumbers.push(i);
     }
   };
