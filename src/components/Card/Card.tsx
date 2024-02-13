@@ -20,6 +20,7 @@ const Card = ({ announcement, shopInfo }: Props) => {
   const { id, name, address1, imageUrl, originalHourlyPay } = shopInfo;
 
   const noticeId = announcement.item.id;
+  console.log(noticeId);
 
   const hourlyPayForm = () => {
     return hourlyPay.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
