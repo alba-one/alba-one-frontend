@@ -11,8 +11,7 @@ import css from './List.module.scss';
 const List = () => {
   const location = useLocation();
   const [offset, setOffset] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(6);
-  const limitNum = 6;
+  const limit = 6;
 
   const [announcements, setAnnouncements] = useState<[]>();
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
@@ -20,23 +19,18 @@ const List = () => {
 
   // const [isSelected, setIsSelected] = useState<boolean>(false);
 
+  console.log('offset: ', offset, 'limit: ', limit);
+
   useEffect(() => {
     const url = '/notices';
     getAxios(`${url}?offset=${offset}&limit=${limit}${location.search}`).then(
       res => (setAnnouncements(res.data.items), setTotalCount(res.data.count))
     );
-  }, [location.search, limit, offset]);
+  }, [location.search, offset]);
 
   const handleFilterBtn = () => {
     setIsFiltered(prev => !prev);
   };
-
-  // ** page num array
-
-  // ** announcement for each page
-  // 1. offset = idx of 'the start'  / former last idx + 1
-  // 2. limit = idx of 'the last'
-  // 3. next page's offset = 'the last' idx + 1
 
   if (!announcements) return;
 
@@ -81,10 +75,8 @@ const List = () => {
         <Pagination
           totalCount={totalCount}
           limit={limit}
-          setLimit={setLimit}
           offset={offset}
           setOffset={setOffset}
-          limitNum={limitNum}
         />
       </section>
     </article>
