@@ -7,6 +7,7 @@ import DetailedFilter from './components/DetailedFilter';
 import Pagination from '@_components/Pagination/Pagination';
 
 import css from './List.module.scss';
+import { NotiType, ShopType } from '@_types/cardType';
 
 const List = () => {
   const location = useLocation();
@@ -14,6 +15,7 @@ const List = () => {
   const limit = 6;
 
   const [announcements, setAnnouncements] = useState<[]>();
+
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
 
@@ -37,7 +39,8 @@ const List = () => {
           <h2 className={css.listTitle}>맞춤 공고</h2>
           <div className={css.cardWrap}>
             {announcements?.map((el, idx: number) => {
-              return <Card key={idx} announcement={el} />;
+              const shopInfo = el.item.shop.item;
+              return <Card key={idx} announcement={el} shopInfo={shopInfo} />;
             })}
           </div>
         </div>
@@ -64,7 +67,8 @@ const List = () => {
         </div>
         <div className={css.cardWrap}>
           {announcements?.map((el, idx: number) => {
-            return <Card key={idx} announcement={el} />;
+            const shopInfo = el.item.shop.item;
+            return <Card key={idx} announcement={el} shopInfo={shopInfo} />;
           })}
         </div>
 

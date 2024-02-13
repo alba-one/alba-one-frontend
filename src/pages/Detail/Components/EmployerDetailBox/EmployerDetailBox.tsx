@@ -1,5 +1,5 @@
 import Icon from '@_components/Icon';
-import AnnouncedInfo from '../AnnouncedInfo/AnnouncedInfo.tsx';
+import AnnouncedInfo from '../AnnouncedInfo/AnnouncedInfo';
 
 import css from './EmployerDetailBox.module.scss';
 import { useEffect, useState } from 'react';
@@ -21,6 +21,7 @@ const EmployerDetailBox = () => {
   let pageNumArr = new Array(pageNum).fill(1);
 
   const params = useParams();
+
   useEffect(() => {
     getAxios(`/shops/c9412e6d-a49d-4e19-9144-5f0dc958db9f/notices/${params.id}/applications
     `).then(res => {
@@ -36,7 +37,7 @@ const EmployerDetailBox = () => {
     });
   }, [refetch]);
 
-  console.log(applyUserList);
+  // console.log(applyUserList);
 
   return (
     <section className={css.annouceBox}>

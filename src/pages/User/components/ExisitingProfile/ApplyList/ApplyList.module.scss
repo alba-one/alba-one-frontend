@@ -16,6 +16,15 @@
   @include body2;
 }
 
+.noticeItemsGrid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr;
+
+  gap: 20px;
+  width: 100%;
+}
+
 .applyBtn {
   @include h4;
   padding: 14px 0;

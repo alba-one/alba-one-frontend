@@ -9,14 +9,12 @@ export interface NotiType {
 }
 
 export interface ShopType {
-  item: {
-    id: string;
-    name: string;
-    category: string;
-    address1: string;
-    address2: string;
-    description: string;
-    imageUrl: string;
-    originalHourlyPay: number;
-  };
+  id: string;
+  name: string;
+  category: string;
+  address1: string;
+  address2: string;
+  description: string;
+  imageUrl: string;
+  originalHourlyPay: number;
 }

@@ -1,5 +1,5 @@
 import Icon from '@_components/Icon';
-import { NotiType } from 'src/types/cardType';
+import { NotiType, ShopType } from 'src/types/cardType';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -9,14 +9,15 @@ interface Props {
   announcement: {
     item: NotiType;
   };
+  shopInfo: ShopType;
 }
 
-const Card = ({ announcement }: Props) => {
+const Card = ({ announcement, shopInfo }: Props) => {
   const navigate = useNavigate();
 
   const { hourlyPay, workhour, startsAt } = announcement.item;
-  const { id, name, address1, imageUrl, originalHourlyPay } =
-    announcement.item.shop.item;
+
+  const { id, name, address1, imageUrl, originalHourlyPay } = shopInfo;
   const noticeId = announcement.item.id;
 
   const hourlyPayForm = () => {
