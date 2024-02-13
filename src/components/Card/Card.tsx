@@ -18,6 +18,7 @@ const Card = ({ announcement, shopInfo }: Props) => {
   const { hourlyPay, workhour, startsAt } = announcement.item;
 
   const { id, name, address1, imageUrl, originalHourlyPay } = shopInfo;
+
   const noticeId = announcement.item.id;
 
   const hourlyPayForm = () => {

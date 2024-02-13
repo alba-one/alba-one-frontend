@@ -1,5 +1,5 @@
 import Icon from '@_components/Icon';
-import AnnouncedInfo from '../AnnouncedInfo/AnnouncedInfo';
+import AnnouncedInfo from '../AnnouncedInfo/AnnouncedInfo.tsx';
 
 import css from './EmployerDetailBox.module.scss';
 import { useEffect, useState } from 'react';
@@ -36,8 +36,6 @@ const EmployerDetailBox = () => {
       );
     });
   }, [refetch]);
-
-  // console.log(applyUserList);
 
   return (
     <section className={css.annouceBox}>

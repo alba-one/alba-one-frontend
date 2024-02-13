@@ -15,7 +15,6 @@ const List = () => {
   const limit = 6;
 
   const [announcements, setAnnouncements] = useState<[]>();
-
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
 

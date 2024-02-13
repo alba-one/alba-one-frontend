@@ -43,7 +43,7 @@ const ApplyList = ({ userId, handleNotice, shopInfo }: Props) => {
 
   return (
     <div>
-      {notice.count === 0 ? (
+      {notice?.count === 0 ? (
         <div className={css.newApplyBox}>
           <span className={css.notice}>
             {isEmployee ? '아직 신청 내역이 없어요' : '공고를 등록해보세요'}
@@ -58,7 +58,6 @@ const ApplyList = ({ userId, handleNotice, shopInfo }: Props) => {
       ) : (
         <div className={css.noticeItemsGrid}>
           {noticeItems?.map((el, idx) => (
-            // shop info 가 없는 상태라 Card 컴포넌트 렌더링 할 자료가 부족함
             <Card key={idx} announcement={el} shopInfo={shopInfo} />
           ))}
         </div>
