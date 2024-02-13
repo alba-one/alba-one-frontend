@@ -11,8 +11,7 @@ import css from './List.module.scss';
 const List = () => {
   const location = useLocation();
   const [offset, setOffset] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(6);
-  const limitNum = 6;
+  const limit = 6;
 
   const [announcements, setAnnouncements] = useState<[]>();
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
@@ -23,7 +22,7 @@ const List = () => {
     getAxios(`${url}?offset=${offset}&limit=${limit}${location.search}`).then(
       res => (setAnnouncements(res.data.items), setTotalCount(res.data.count))
     );
-  }, [location.search, limit, offset]);
+  }, [location.search, offset]);
 
   const handleFilterBtn = () => {
     setIsFiltered(prev => !prev);
@@ -72,10 +71,8 @@ const List = () => {
         <Pagination
           totalCount={totalCount}
           limit={limit}
-          setLimit={setLimit}
           offset={offset}
           setOffset={setOffset}
-          limitNum={limitNum}
         />
       </section>
     </article>
