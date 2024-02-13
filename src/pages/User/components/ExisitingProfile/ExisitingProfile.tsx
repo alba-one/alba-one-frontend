@@ -32,6 +32,7 @@ const ExisitingProfile = ({ userInfo }: any) => {
   const confirmModal = () => {
     setIsOpenRegistNotice(prev => !prev);
     setIsOpenMakeProfile(prev => !prev);
+    setIsModalOpen(prev => !prev);
   };
 
   return (
