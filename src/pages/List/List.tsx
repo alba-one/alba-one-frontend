@@ -17,10 +17,6 @@ const List = () => {
   const [isFiltered, setIsFiltered] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
 
-  // const [isSelected, setIsSelected] = useState<boolean>(false);
-
-  console.log('offset: ', offset, 'limit: ', limit);
-
   useEffect(() => {
     const url = '/notices';
     getAxios(`${url}?offset=${offset}&limit=${limit}${location.search}`).then(

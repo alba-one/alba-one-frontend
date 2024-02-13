@@ -40,16 +40,6 @@ const Pagination = ({ totalCount, limit, offset, setOffset }: Props) => {
     getCurrentPage();
   }, [offset]);
 
-  // pagination
-  //o  ** page numbers **
-  //o  1. total count / perpage = amount of page
-  //o  2. amount of page / page per box = page boxes
-
-  // ** selected page **
-  // 1. current page
-  // 2. how can i get the current ? : offset number? = (limitNum * n) +1
-  //o  3. default offset = 1 : useState(1) == currentPage
-
   const totalPage = Math.ceil(totalCount / limit);
 
   const pageNumbers: number[] = [];
