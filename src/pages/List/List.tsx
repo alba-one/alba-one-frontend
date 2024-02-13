@@ -7,7 +7,6 @@ import DetailedFilter from './components/DetailedFilter';
 import Pagination from '@_components/Pagination/Pagination';
 
 import css from './List.module.scss';
-import { NotiType, ShopType } from '@_types/cardType';
 
 const List = () => {
   const location = useLocation();

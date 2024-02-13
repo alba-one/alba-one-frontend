@@ -7,6 +7,7 @@ import Card from '@_components/Card';
 import { ShopType } from '@_types/cardType';
 
 import css from './ApplyList.module.scss';
+import Pagination from '@_components/Pagination/Pagination';
 
 interface Props {
   userId: string;
@@ -23,23 +24,29 @@ const ApplyList = ({ userId, handleNotice, shopInfo }: Props) => {
     items: [];
   }>();
 
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const [offset, setOffset] = useState<number>(0);
+  const limit = 6;
+
   const navigate = useNavigate();
   const { isEmployee } = useGetUserType();
 
   useEffect(() => {
     const checkNoticeUrl = isEmployee
       ? `/users/${userId}/applications`
-      : `/shops/${userId}/notices`;
+      : `/shops/${userId}/notices?offset=${offset}&limit=${limit}`;
 
     getAxios(checkNoticeUrl).then(res => {
       setNotice(res.data);
+      setTotalCount(res.data.count);
     });
-  }, [userId]);
+  }, [userId, offset]);
 
   const noticeItems = notice?.items;
 
   if (!notice) return null;
   if (!noticeItems) return null;
+  if (!totalCount) return null;
 
   return (
     <div>
@@ -62,6 +69,13 @@ const ApplyList = ({ userId, handleNotice, shopInfo }: Props) => {
           ))}
         </div>
       )}
+
+      <Pagination
+        totalCount={totalCount}
+        limit={limit}
+        offset={offset}
+        setOffset={setOffset}
+      />
     </div>
   );
 };
