@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 interface Props {
   totalCount: number;
   limit: number;
-
   offset: number;
   setOffset: React.Dispatch<React.SetStateAction<number>>;
 }

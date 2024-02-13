@@ -2,15 +2,27 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetUserType } from '@_hooks/useGetUserType';
 import { getAxios } from '@_lib/axios';
+
+import Card from '@_components/Card';
+import { ShopType } from '@_types/cardType';
+
 import css from './ApplyList.module.scss';
 
 interface Props {
   userId: string;
   handleNotice: () => void;
+  shopInfo: ShopType;
 }
 
-const ApplyList = ({ userId, handleNotice }: Props) => {
-  const [noticeList, setNoticeList] = useState<any>([]);
+const ApplyList = ({ userId, handleNotice, shopInfo }: Props) => {
+  const [notice, setNotice] = useState<{
+    offset: number;
+    limit: number;
+    count: number;
+    hasNext: boolean;
+    items: [];
+  }>();
+
   const navigate = useNavigate();
   const { isEmployee } = useGetUserType();
 
@@ -20,13 +32,18 @@ const ApplyList = ({ userId, handleNotice }: Props) => {
       : `/shops/${userId}/notices`;
 
     getAxios(checkNoticeUrl).then(res => {
-      setNoticeList(res.data.items);
+      setNotice(res.data);
     });
   }, [userId]);
 
+  const noticeItems = notice?.items;
+
+  if (!notice) return null;
+  if (!noticeItems) return null;
+
   return (
     <div>
-      {noticeList?.length === 0 ? (
+      {notice?.count === 0 ? (
         <div className={css.newApplyBox}>
           <span className={css.notice}>
             {isEmployee ? '아직 신청 내역이 없어요' : '공고를 등록해보세요'}
@@ -39,7 +56,11 @@ const ApplyList = ({ userId, handleNotice }: Props) => {
           </button>
         </div>
       ) : (
-        <div>리스트가 나올 예정</div>
+        <div className={css.noticeItemsGrid}>
+          {noticeItems?.map((el, idx) => (
+            <Card key={idx} announcement={el} shopInfo={shopInfo} />
+          ))}
+        </div>
       )}
     </div>
   );

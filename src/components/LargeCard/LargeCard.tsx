@@ -24,21 +24,25 @@ const LaregeCard = ({
   const { hourlyPay, startsAt, workhour, id } = notice;
 
   useEffect(() => {
-    getAxios(`/users/${localStorage.getItem('userId')}/applications`).then(
-      res => setApplicationList(res.data)
-    );
+    if (isEmployee === true) {
+      getAxios(`/users/${localStorage.getItem('userId')}/applications`).then(
+        res => setApplicationList(res.data)
+      );
+    }
   }, [refetch]);
 
   const handleApplication = () => {
-    getAxios(`/users/${localStorage.getItem('userId')}`).then(res => {
-      if (res.data.item.name) {
-        postAxios(`/shops/${shop.id}/notices/${id}/applications`, {}).then(
-          res => setRefetch(prev => !prev)
-        );
-      } else {
-        alert('프로필을 먼저 등록해주세요');
-      }
-    });
+    if (isEmployee === true) {
+      getAxios(`/users/${localStorage.getItem('userId')}`).then(res => {
+        if (res.data.item.name) {
+          postAxios(`/shops/${shop.id}/notices/${id}/applications`, {}).then(
+            res => setRefetch(prev => !prev)
+          );
+        } else {
+          alert('프로필을 먼저 등록해주세요');
+        }
+      });
+    }
   };
 
   if (!applicationList?.items) return null;

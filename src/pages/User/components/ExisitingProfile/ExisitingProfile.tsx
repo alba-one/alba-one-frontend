@@ -32,6 +32,7 @@ const ExisitingProfile = ({ userInfo }: any) => {
   const confirmModal = () => {
     setIsOpenRegistNotice(prev => !prev);
     setIsOpenMakeProfile(prev => !prev);
+    setIsModalOpen(prev => !prev);
   };
 
   return (
@@ -55,9 +56,13 @@ const ExisitingProfile = ({ userInfo }: any) => {
       <article className={css.listBackround}>
         <div className={css.listBox}>
           <h2 className={css.title}>
-            {isEmployee ? '신청 내역' : '등록한 공고'}
+            {isEmployee ? '신청 내역' : '내가 등록한 공고'}
           </h2>
-          <ApplyList userId={userData.id} handleNotice={handleNotice} />
+          <ApplyList
+            userId={userData.id}
+            handleNotice={handleNotice}
+            shopInfo={userData}
+          />
         </div>
       </article>
       {isOpenRegistNotice && (
