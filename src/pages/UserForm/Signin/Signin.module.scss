@@ -1,0 +1,15 @@
+@import '@_styles/colors';
+
+.inputBox {
+  margin-top: 10px;
+}
+
+.errorBox {
+  margin: 8px 0px;
+  height: 16px;
+}
+
+.errorMsg {
+  font-size: 12px;
+  color: $red_40;
+}
